@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "282546345277",
+    "firebase_url": "https://axis2019-47b13.firebaseio.com",
+    "project_id": "axis2019-47b13",
+    "storage_bucket": "axis2019-47b13.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:282546345277:android:55ee947ffa571798",
+        "android_client_info": {
+          "package_name": "com.developer.app.axis19"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "282546345277-83a5fgpm6eom44mgk9qgt5glla3p34sb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCZTNYneIuh8w7EIl9KrJSeXsUjUKljS-A"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
