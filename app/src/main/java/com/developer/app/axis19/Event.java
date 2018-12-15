@@ -5,8 +5,13 @@ public class Event {
     private String OName1;
     private String OName2;
     private String desc;
-    private int Image;
+    private String img_url;
 
+    public Event ()
+    {
+        //no arg constructor required ...
+    }
+    
     public String getOName1() {
         return OName1;
     }
@@ -33,14 +38,13 @@ public class Event {
         this.desc = desc;
     }
 
-    public int getImage() {
-        return Image;
+    public String getImg_url() {
+        return img_url;
     }
 
-    public void setImage(int image) {
-        Image = image;
+    public void setImg_url(String img_url) {
+        this.img_url = img_url;
     }
-
     public Event(String eventName, String OName1, String OName2, String desc, int image) {
         EventName = eventName;
         this.OName1 = OName1;

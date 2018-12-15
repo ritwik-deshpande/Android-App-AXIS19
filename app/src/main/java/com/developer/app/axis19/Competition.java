@@ -13,6 +13,13 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+
 public class Competition extends Fragment {
 
     View v;
@@ -20,6 +27,10 @@ public class Competition extends Fragment {
 
     List<Event> lst ;
 
+    DatabaseReference rootRef,imagesRef;
+    ValueEventListener valueEventListener;
+    
+    
     public Competition(){
 
     }
@@ -27,19 +38,26 @@ public class Competition extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        lst  = new ArrayList<>();
+        rootRef = FirebaseDatabase.getInstance().getReference();
+        imagesRef = rootRef.child("Events").child("Competitions");
+        valueEventListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for(DataSnapshot ds : dataSnapshot.getChildren()) {
 
-        lst= new ArrayList<>();
+                        lst.add((ds.getValue(Event.class)));
+                        Log.d("TAG","firebase created event object");
+                }
+            }
 
-        lst.add(new Event("Electroblitz","Kapeel","Sanika","Coding Event",R.drawable.event_1));
-        lst.add(new Event("Insomnia","Kapeel","Sanika","Coding Event",R.drawable.event_2));
-        lst.add(new Event("Cryptocrux","Kapeel","Sanika","Coding Event",R.drawable.event_3));
-        lst.add(new Event("Pasterolic","Kapeel","Sanika","Coding Event",R.drawable.event_4));
-        lst.add(new Event("Paradigma","Kapeel","Sanika","Coding Event",R.drawable.viewpager_3));
-        lst.add(new Event("Turboflux","Kapeel","Sanika","Coding Event",R.drawable.viewpager_3));
-        lst.add(new Event("Aquahunt","Kapeel","Sanika","Coding Event",R.drawable.viewpager_3));
-        lst.add(new Event("Aquahunt","Kapeel","Sanika","Coding Event",R.drawable.viewpager_3));
-        lst.add(new Event("Autobot","Kapeel","Sanika","Coding Event",R.drawable.viewpager_3));
-        lst.add(new Event("Crepido","Kapeel","Sanika","Coding Event",R.drawable.viewpager_3));
+            @Override
+            public void onCancelled(DatabaseError databaseError) {}
+        };
+        imagesRef.addListenerForSingleValueEvent(valueEventListener);
+
+
+    }
 
     }
 
