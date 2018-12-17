@@ -40,7 +40,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder myViewHolder, final int i) {
         myViewHolder.eventName.setText(list.get(i).getEventName());
-        Glide.with(context).load(list.get(i).getImg_url()).into(myViewHolder.eventImg);
+        int img=Integer.parseInt(list.get(i).getImg_url());
+        Glide.with(context).load(img).into(myViewHolder.eventImg);
         myViewHolder.parentLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -51,6 +52,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                 intent.putExtra("OName1",list.get(i).getOName1());
                 intent.putExtra("OName2",list.get(i).getOName2());
                 intent.putExtra("EventDesc",list.get(i).getDesc());
+                intent.putExtra("phone1", list.get(i).getPhone1());
+                intent.putExtra("phone2", list.get(i).getPhone2());
                 context.startActivity(intent);
             }
         });

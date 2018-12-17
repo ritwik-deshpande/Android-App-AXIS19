@@ -45,7 +45,12 @@ public class coreteam extends AppCompatActivity {
         lst.add(new Profile("Sathish",R.drawable.sathish,"ritwikdeshpande01@gmail.com","9820188402","Core-Coordinator"));
         lst.add(new Profile("Sathish",R.drawable.sathish,"ritwikdeshpande01@gmail.com","9820188402","Treasurer"));
         initRecyclerView();
+        //callandSave("Sathish","9820188402");
+
     }
+
+
+
     void initRecyclerView(){
         Log.d(TAG,"Inisde Init Recycler View");
         RecyclerView recyclerView= findViewById(R.id.ct_recyclerview);
