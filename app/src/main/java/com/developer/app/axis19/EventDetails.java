@@ -56,8 +56,8 @@ public class EventDetails extends AppCompatActivity {
     public void getIncomingIntent(){
 
         Log.d(TAG,"Checking for incoming Intent");
-        if(getIntent().hasExtra("EventName") && getIntent().hasExtra("EventName") && getIntent().hasExtra("OName1") && getIntent().hasExtra("OName2") && getIntent().hasExtra("EventDesc") ) {
-            int eventImg = getIntent().getIntExtra("EventImage",100);
+        if(getIntent().hasExtra("EventImage") && getIntent().hasExtra("EventName") && getIntent().hasExtra("OName1") && getIntent().hasExtra("OName2") && getIntent().hasExtra("EventDesc") ) {
+            int eventImg = getIntent().getStringExtra("EventImage");
             String eventName = getIntent().getStringExtra("EventName");
 
             String eventO1 = getIntent().getStringExtra("OName1");
@@ -70,7 +70,7 @@ public class EventDetails extends AppCompatActivity {
         }
     }
 
-    public void setEvent(int eventImg,String eventName,String eventDesc,String OName1,String OName2){
+    public void setEvent(String event_img_url,String eventName,String eventDesc,String OName1,String OName2){
 
         Log.d(TAG,"Setting our event");
        // TextView textView1=(TextView)findViewById(R.id.event_name);
