@@ -13,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.firebase.ui.storage.images.FirebaseImageLoader;
 
 import java.util.List;
 
@@ -40,7 +41,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder myViewHolder, final int i) {
         myViewHolder.eventName.setText(list.get(i).getEventName());
-        int img=Integer.parseInt(list.get(i).getImg_url());
+        String img = list.get(i).getImg_url();
+        Glide.with(context).load(img).into(myViewHolder.eventImg);
         Glide.with(context).load(img).into(myViewHolder.eventImg);
         myViewHolder.parentLayout.setOnClickListener(new View.OnClickListener() {
             @Override

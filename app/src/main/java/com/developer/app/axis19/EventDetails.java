@@ -6,6 +6,7 @@ import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -19,7 +20,8 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.RequestOptions;
+import com.firebase.ui.storage.images.FirebaseImageLoader;
+
 
 public class EventDetails extends AppCompatActivity {
 
@@ -44,6 +46,24 @@ public class EventDetails extends AppCompatActivity {
         });
         AppCompatImageButton call_person_one = (AppCompatImageButton) findViewById(R.id.call_contact_person_one);
         AppCompatImageButton call_person_two = (AppCompatImageButton) findViewById(R.id.call_contact_person_two);
+        AppCompatImageButton save_person_one = (AppCompatImageButton) findViewById(R.id.save_contact_person_one);
+        AppCompatImageButton save_person_two = (AppCompatImageButton) findViewById(R.id.save_contact_person_two);
+
+        save_person_one.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(getIntent().hasExtra("OName1") && getIntent().hasExtra("phone1"))
+                    save_contact(getIntent().getStringExtra("OName1"),getIntent().getLongExtra("phone1",0));
+            }
+        });
+
+        save_person_two.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(getIntent().hasExtra("OName2") && getIntent().hasExtra("phone2"))
+                    save_contact(getIntent().getStringExtra("OName2"),getIntent().getLongExtra("phone2",0));
+            }
+        });
         call_person_one.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -64,7 +84,7 @@ public class EventDetails extends AppCompatActivity {
 
         Log.d(TAG,"Checking for incoming Intent");
         if(getIntent().hasExtra("EventName") && getIntent().hasExtra("EventName") && getIntent().hasExtra("OName1") && getIntent().hasExtra("OName2") && getIntent().hasExtra("EventDesc") ) {
-            int eventImg = getIntent().getIntExtra("EventImage",100);
+            String event_img_url = getIntent().getStringExtra("EventImage");
             String eventName = getIntent().getStringExtra("EventName");
 
             String eventO1 = getIntent().getStringExtra("OName1");
@@ -73,11 +93,11 @@ public class EventDetails extends AppCompatActivity {
             String eventDesc = getIntent().getStringExtra("EventDesc");
 
             Log.d(TAG,"Our Event:\n"+eventName+"\n"+eventDesc+"\n"+eventO1+"\n"+eventO2+"\n" );
-            setEvent(eventImg, eventName, eventDesc, eventO1, eventO2);
+            setEvent(event_img_url, eventName, eventDesc, eventO1, eventO2);
         }
     }
 
-    public void setEvent(int eventImg,String eventName,String eventDesc,String OName1,String OName2){
+    public void setEvent(String event_img_url ,String eventName,String eventDesc,String OName1,String OName2){
 
         Log.d(TAG,"Setting our event");
        // TextView textView1=(TextView)findViewById(R.id.event_name);
@@ -99,7 +119,7 @@ public class EventDetails extends AppCompatActivity {
         ImageView imageView=(ImageView)findViewById(R.id.event_img);
 
        // Glide.with(mContext).load(mResources[position]).fitCenter().into(imageView);
-        Glide.with(this).load(eventImg).apply(new RequestOptions().fitCenter()).into(imageView);
+        Glide.with(this).load(event_img_url).into(imageView);
 
     }
 
@@ -114,6 +134,14 @@ public class EventDetails extends AppCompatActivity {
             // permission not granted. Hence revoke permission
             ActivityCompat.requestPermissions(EventDetails.this, new String[]{Manifest.permission.CALL_PHONE}, 1);
         }
+    }
+
+    public void save_contact (String name, long phone_no){
+        Intent intent = new Intent(Intent.ACTION_INSERT, ContactsContract.Contacts.CONTENT_URI);
+        intent.putExtra(ContactsContract.Intents.Insert.NAME, name );
+        intent.putExtra(ContactsContract.Intents.Insert.PHONE, "" + phone_no);
+        startActivity(intent);
+
     }
     private void setTitle(final String title) {
         final CollapsingToolbarLayout collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.toolbar_layout);
