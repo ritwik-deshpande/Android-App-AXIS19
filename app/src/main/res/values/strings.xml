@@ -33,7 +33,7 @@
     <string name="hint_password">Password</string>
     <string name="desc_firebase_lockup">Firebase logo and name</string>
     <string name="auth_failed">Authentication failed</string>
-    <string name="title_activity_main">HOME</string>
+    <string name="title_activity_main">AXIS19</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="nav_header_title">AXIS 19</string>
@@ -141,5 +141,33 @@
     <string name="organizers">Organizers</string>
     <string name="contact_person_two">Contact Person Two (9874561230)</string>
     <string name="contact_person_one">Contact Person One (3120456987)</string>
+
+    <string name="contact_us">Contact us</string>
+    <string name="sponsors">Sponsors</string>
+    <string name="committee">Committee</string>
+    <string name="developers">Developers</string>
+    <string name="follow_facebook">Facebook</string>
+    <string name="axis_fb_link">https://www.facebook.com/axisvnit</string>
+
+    <string name="follow_instagram">Instagram</string>
+    <string name="axis_insta_link">https://www.instagram.com/axis_vnit</string>
+    <string name="Madhusudan">http://www.axisvnit.org/Contact/assets/images/team/Madhusudan_Baldua.jpeg</string>
+    <string name="Sathish">http://www.axisvnit.org/Contact/assets/images/team/Sathish_Reddy.jpeg</string>
+    <string name="Ira">http://www.axisvnit.org/Contact/assets/images/team/Ira_Kamble.jpeg</string>
+    <string name="Bana">http://www.axisvnit.org/Contact/assets/images/team/Triyambkeshwar_Saxena.jpeg</string>
+    <string name="Ritika">http://www.axisvnit.org/Contact/assets/images/team/Ritika_Ghadia.jpeg</string>
+    <string name="Prajwal">http://www.axisvnit.org/Contact/assets/images/team/Prajwal_Pise.jpeg</string>
+    <string name="Mansit">http://www.axisvnit.org/Contact/assets/images/team/Mansit_Suman.jpeg</string>
+    <string name="Prathamesh">http://www.axisvnit.org/Contact/assets/images/team/Prathamesh_Themdeo.jpeg</string>
+    <string name="Himanshu">http://www.axisvnit.org/Contact/assets/images/team/Himanshu_Tambe.jpeg</string>
+    <string name="Durgesh">http://www.axisvnit.org/Contact/assets/images/team/Durgesh_Rallapalli.jpeg</string>
+    <string name="Sahiti">http://www.axisvnit.org/Contact/assets/images/team/Sahithi_Maddipatla.jpeg</string>
+    <string name="Harshita">http://www.axisvnit.org/Contact/assets/images/team/Harshita_Bajaj.jpeg</string>
+
+    <string name="follow_twitter">Twitter</string>
+    <string name="axis_twit_link">https://twitter.com/axisvnit</string>
+    <string name="aboutapp">About App</string>
+    <string name="core_team">Core Team</string>
+    <string name="title_activity_coreteam">coreteam</string>
 
 </resources>

@@ -6,4 +6,24 @@
         android:orderInCategory="100"
         android:title="@string/action_settings"
         app:showAsAction="never" />
+
+    <item
+        android:id="@+id/menu_follow_fb"
+        android:icon="@drawable/svg_logo_facebook"
+        app:showAsAction="always"
+        android:title=""/>
+
+    <item
+        android:id="@+id/menu_follow_instagram"
+        android:icon="@drawable/svg_logo_instagram"
+        app:showAsAction="always"
+        android:title=""/>
+
+    <item
+        android:id="@+id/menu_follow_twitter"
+        android:icon="@drawable/svg_logo_twitter"
+        app:showAsAction="always"
+        android:title=""/>
+
+
 </menu>

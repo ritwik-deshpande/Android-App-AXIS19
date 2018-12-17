@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 
 public class EventDetails extends AppCompatActivity {
 
@@ -76,7 +77,7 @@ public class EventDetails extends AppCompatActivity {
         ImageView imageView=(ImageView)findViewById(R.id.event_img);
 
        // Glide.with(mContext).load(mResources[position]).fitCenter().into(imageView);
-        Glide.with(this).load(eventImg).fitCenter().into(imageView);
+        Glide.with(this).load(eventImg).apply(new RequestOptions().fitCenter()).into(imageView);
 
     }
 

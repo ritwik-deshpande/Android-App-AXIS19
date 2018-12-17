@@ -6,18 +6,19 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class Competition extends Fragment {
@@ -59,7 +60,7 @@ public class Competition extends Fragment {
 
     }
 
-    }
+
 
 
 
@@ -73,7 +74,7 @@ public class Competition extends Fragment {
 
         RecyclerViewAdapter recyclerViewAdapter=new RecyclerViewAdapter(getContext(),lst);
 
-        recyclerView.setLayoutManager(new GridLayoutManager(getContext(),3));
+        recyclerView.setLayoutManager(new GridLayoutManager(getContext(),2));
         recyclerView.setAdapter(recyclerViewAdapter);
 
         return v;

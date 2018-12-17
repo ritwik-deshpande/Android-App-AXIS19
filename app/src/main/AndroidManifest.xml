@@ -45,7 +45,11 @@
         <activity
             android:name=".EventDetails"
             android:label="@string/title_activity_event_details"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".coreteam"
+            android:label="Core Team"
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>

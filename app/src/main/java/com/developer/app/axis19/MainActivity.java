@@ -1,8 +1,8 @@
 package com.developer.app.axis19;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
@@ -17,13 +17,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
-import me.relex.circleindicator.CircleIndicator;
-
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    CustomPagerAdapter mCustomPagerAdapter;
-    CustomViewPager mViewPager;
+
+    private DrawerLayout drawerLayout;
     private TabLayout tabLayout;
     ViewPagerAdapter viewPagerAdapter;
     ViewPager viewPager;
@@ -54,20 +52,7 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        mCustomPagerAdapter = new CustomPagerAdapter(this);
-        mViewPager = (CustomViewPager) findViewById(R.id.viewpager_main);
-        CircleIndicator indicator = (CircleIndicator) findViewById(R.id.indicator);
-        mViewPager.setAdapter(mCustomPagerAdapter);
-        indicator.setViewPager(mViewPager);
 
-        final Handler h = new Handler(Looper.getMainLooper());
-        final Runnable r = new Runnable() {
-            public void run() {
-                mViewPager.setCurrentItem((mViewPager.getCurrentItem()+1)%3, true);
-                h.postDelayed(this, 3000);
-            }
-        };
-        h.postDelayed(r, 3000);
 
         tabLayout=(TabLayout)findViewById(R.id.tabLayout_id);
         viewPager=(ViewPager)findViewById(R.id.viewpager_id);
@@ -75,7 +60,7 @@ public class MainActivity extends AppCompatActivity
 
         // Adding Fragments
 
-
+        viewPagerAdapter.addFragment(new News(),"News and More");
         viewPagerAdapter.addFragment(new Competition(),"Competitions");
         viewPagerAdapter.addFragment(new guestlectures(),"Guest Lectures");
         viewPagerAdapter.addFragment(new Informals(),"Informals");
@@ -108,13 +93,32 @@ public class MainActivity extends AppCompatActivity
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
+        Uri uri=null;
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                drawerLayout.openDrawer(GravityCompat.START);
+                return true;
+            //case R.id.follow_us:
+            //  return true;
+            //case R.id.menu_visit_website:
+            //  uri = Uri.parse(getResources().getString(R.string.matrix_website));
+            //break;
+            case R.id.menu_follow_fb:
+                uri = Uri.parse(getResources().getString(R.string.axis_fb_link));
+                break;
+            // case R.id.menu_follow_twitter:
+            //   uri = Uri.parse(getResources().getString(R.string.matrix_twit_link));
+            // break;
+            case R.id.menu_follow_instagram:
+                uri = Uri.parse(getResources().getString(R.string.axis_insta_link));
+                break;
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+            //case R.id.menu_sign_out:
+
         }
 
+        Intent i = new Intent(Intent.ACTION_VIEW, uri);
+        startActivity(i);
         return super.onOptionsItemSelected(item);
     }
 
@@ -124,17 +128,22 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
+        if (id == R.id.homepage_menuItem) {
             // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
+            Intent i = new Intent(this,MainActivity.class);
+            startActivity(i);
+        } else if (id == R.id.myRegistrations_menuItem) {
 
-        } else if (id == R.id.nav_slideshow) {
+        } else if (id == R.id.sponsors_menuItem) {
 
-        } else if (id == R.id.nav_manage) {
+        } else if (id == R.id.core_menuItem) {
+            Intent i = new Intent(MainActivity.this,coreteam.class);
+            startActivity(i);
 
-        } else if (id == R.id.nav_share) {
 
-        } else if (id == R.id.nav_send) {
+        } else if (id == R.id.developers_menuItem) {
+
+        } else if (id == R.id.sign_out) {
 
         }
 

@@ -45,12 +45,12 @@ public class Event {
     public void setImg_url(String img_url) {
         this.img_url = img_url;
     }
-    public Event(String eventName, String OName1, String OName2, String desc, int image) {
+    public Event(String eventName, String OName1, String OName2, String desc, String image) {
         EventName = eventName;
         this.OName1 = OName1;
         this.OName2 = OName2;
         this.desc = desc;
-        Image = image;
+        this.img_url=image;
     }
 
     public void setEventName(String eventName) {

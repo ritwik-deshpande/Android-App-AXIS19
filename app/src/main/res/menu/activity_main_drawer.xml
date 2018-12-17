@@ -3,36 +3,52 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
 
-    <group android:checkableBehavior="single">
+    <group
+        android:id="@+id/group1"
+        android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_camera"
-            android:icon="@drawable/ic_menu_camera"
-            android:title="Import" />
+            android:title="Home"
+            android:id="@+id/homepage_menuItem"
+            android:icon="@drawable/svg_home_white_24px"/>
+
         <item
-            android:id="@+id/nav_gallery"
-            android:icon="@drawable/ic_menu_gallery"
-            android:title="Gallery" />
+            android:title = "My Registrations"
+            android:id="@+id/myRegistrations_menuItem"
+            android:icon="@drawable/svg_chat_white_48px"/>
+
         <item
-            android:id="@+id/nav_slideshow"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="Slideshow" />
-        <item
-            android:id="@+id/nav_manage"
-            android:icon="@drawable/ic_menu_manage"
-            android:title="Tools" />
+            android:title="@string/sponsors"
+            android:id="@+id/sponsors_menuItem"
+            android:icon="@drawable/svg_new_releases_white_48px"/>
+
     </group>
 
-    <item android:title="Communicate">
-        <menu>
-            <item
-                android:id="@+id/nav_share"
-                android:icon="@drawable/ic_menu_share"
-                android:title="Share" />
-            <item
-                android:id="@+id/nav_send"
-                android:icon="@drawable/ic_menu_send"
-                android:title="Send" />
-        </menu>
-    </item>
+    <group
+        android:id="@+id/group2"
+        android:checkableBehavior="single">
+
+        <item
+            android:title="@string/core_team"
+            android:id="@+id/core_menuItem"
+            android:icon="@drawable/svg_group_work_white_48px"/>
+
+        <item
+            android:title="@string/developers"
+            android:id="@+id/developers_menuItem"
+            android:icon="@drawable/svg_code_white_48px"/>
+
+    </group>
+
+    <group
+        android:id="@+id/group3"
+        android:checkableBehavior="single">
+
+
+        <item
+            android:title="Sign Out"
+            android:id="@+id/sign_out"
+            android:icon="@drawable/svg_group_work_white_48px"/>
+
+    </group>
 
 </menu>

@@ -40,13 +40,13 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder myViewHolder, final int i) {
         myViewHolder.eventName.setText(list.get(i).getEventName());
-        Glide.with(context).load(list.get(i).getImage()).into(myViewHolder.eventImg);
+        Glide.with(context).load(list.get(i).getImg_url()).into(myViewHolder.eventImg);
         myViewHolder.parentLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Toast.makeText(context,list.get(i).getEventName(),Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(context,EventDetails.class);
-                intent.putExtra("EventImage",list.get(i).getImage());
+                intent.putExtra("EventImage",list.get(i).getImg_url());
                 intent.putExtra("EventName",list.get(i).getEventName());
                 intent.putExtra("OName1",list.get(i).getOName1());
                 intent.putExtra("OName2",list.get(i).getOName2());

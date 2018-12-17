@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 
 class CustomPagerAdapter extends PagerAdapter {
     private Context mContext;
@@ -39,7 +40,7 @@ class CustomPagerAdapter extends PagerAdapter {
         View itemView = mLayoutInflater.inflate(R.layout.pager_item, container, false);
 
         ImageView imageView = (ImageView) itemView.findViewById(R.id.viewpager_image);
-        Glide.with(mContext).load(mResources[position]).fitCenter().into(imageView);
+        Glide.with(mContext).load(mResources[position]).apply(new RequestOptions().fitCenter()).into(imageView);
         container.addView(itemView);
 
         return itemView;
