@@ -35,13 +35,29 @@ public class EventDetails extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+        AppCompatImageButton call_person_one = (AppCompatImageButton) findViewById(R.id.call_contact_person_one);
+        AppCompatImageButton call_person_two = (AppCompatImageButton) findViewById(R.id.call_contact_person_two);
+        call_person_one.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(getIntent().hasExtra("phone1"))
+                    makePhoneCall(getIntent().getLongExtra("phone1",0));
+            }
+        });
+        call_person_two.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(getIntent().hasExtra("phone2"))
+                makePhoneCall(getIntent().getLongExtra("phone2",0));
+            }
+        });
         getIncomingIntent();
     }
     public void getIncomingIntent(){
 
         Log.d(TAG,"Checking for incoming Intent");
-        if(getIntent().hasExtra("EventName") && getIntent().hasExtra("EventName") && getIntent().hasExtra("OName1") && getIntent().hasExtra("OName2") && getIntent().hasExtra("EventDesc") ) {
-            int eventImg = getIntent().getIntExtra("EventImage",100);
+        if(getIntent().hasExtra("EventImage") && getIntent().hasExtra("EventName") && getIntent().hasExtra("OName1") && getIntent().hasExtra("OName2") && getIntent().hasExtra("EventDesc") ) {
+            int eventImg = getIntent().getStringExtra("EventImage");
             String eventName = getIntent().getStringExtra("EventName");
 
             String eventO1 = getIntent().getStringExtra("OName1");
@@ -54,7 +70,7 @@ public class EventDetails extends AppCompatActivity {
         }
     }
 
-    public void setEvent(int eventImg,String eventName,String eventDesc,String OName1,String OName2){
+    public void setEvent(String event_img_url,String eventName,String eventDesc,String OName1,String OName2){
 
         Log.d(TAG,"Setting our event");
        // TextView textView1=(TextView)findViewById(R.id.event_name);
@@ -76,10 +92,22 @@ public class EventDetails extends AppCompatActivity {
         ImageView imageView=(ImageView)findViewById(R.id.event_img);
 
        // Glide.with(mContext).load(mResources[position]).fitCenter().into(imageView);
-        Glide.with(this).load(eventImg).fitCenter().into(imageView);
+        Glide.with(this).load(event_img_url).fitCenter().into(imageView);
 
     }
 
+    public void makePhoneCall(long phone_no)
+    {
+        Intent intent = new Intent(Intent.ACTION_CALL);
+        intent.setData(Uri.parse("tel:"+phone_no));
+        if (ActivityCompat.checkSelfPermission(EventDetails.this,
+                Manifest.permission.CALL_PHONE) == PackageManager.PERMISSION_GRANTED) {
+            startActivity(intent);
+        } else {
+            // permission not granted. Hence revoke permission
+            ActivityCompat.requestPermissions(EventDetails.this, new String[]{Manifest.permission.CALL_PHONE}, 1);
+        }
+    }
     private void setTitle(final String title) {
         final CollapsingToolbarLayout collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.toolbar_layout);
         collapsingToolbarLayout.setTitle(title);
