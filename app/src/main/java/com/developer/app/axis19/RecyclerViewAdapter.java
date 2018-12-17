@@ -51,6 +51,9 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                 intent.putExtra("OName1",list.get(i).getOName1());
                 intent.putExtra("OName2",list.get(i).getOName2());
                 intent.putExtra("EventDesc",list.get(i).getDesc());
+                intent.putExtra("phone1", list.get(i).getPhone1());
+                intent.putExtra("phone2", list.get(i).getPhone2());
+
                 context.startActivity(intent);
             }
         });
