@@ -9,6 +9,10 @@ public class Event {
     private long phone1;
     private long phone2;
 
+    public Event(){
+        //important to keep a no atg constructor
+    }
+
     public long getPhone1() {
         return phone1;
     }
