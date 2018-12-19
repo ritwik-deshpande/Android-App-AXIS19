@@ -39,24 +39,6 @@ public class Competition extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        lst  = new ArrayList<>();
-        rootRef = FirebaseDatabase.getInstance().getReference();
-        imagesRef = rootRef.child("Events").child("Competitions");
-        valueEventListener = new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                for(DataSnapshot ds : dataSnapshot.getChildren()) {
-
-                        lst.add((ds.getValue(Event.class)));
-                        Log.d("TAG","firebase created event object");
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {}
-        };
-        imagesRef.addListenerForSingleValueEvent(valueEventListener);
-
 
     }
 
@@ -67,12 +49,29 @@ public class Competition extends Fragment {
 
         v= inflater.inflate(R.layout.competitions_fragment,container,false);
 
-        recyclerView = (RecyclerView)v.findViewById(R.id.competition_recyclerview);
+        lst  = new ArrayList<>();
+        rootRef = FirebaseDatabase.getInstance().getReference();
+        imagesRef = rootRef.child("Events").child("Competitions");
+        valueEventListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for(DataSnapshot ds : dataSnapshot.getChildren()) {
 
-        RecyclerViewAdapter recyclerViewAdapter=new RecyclerViewAdapter(getContext(),lst);
+                    lst.add((ds.getValue(Event.class)));
+                    Log.d("TAG","firebase created event object");
+                }
+                recyclerView = (RecyclerView)v.findViewById(R.id.competition_recyclerview);
 
-        recyclerView.setLayoutManager(new GridLayoutManager(getContext(),2));
-        recyclerView.setAdapter(recyclerViewAdapter);
+                RecyclerViewAdapter recyclerViewAdapter=new RecyclerViewAdapter(getContext(),lst);
+
+                recyclerView.setLayoutManager(new GridLayoutManager(getContext(),2));
+                recyclerView.setAdapter(recyclerViewAdapter);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {}
+        };
+        imagesRef.addListenerForSingleValueEvent(valueEventListener);
 
         return v;
 
