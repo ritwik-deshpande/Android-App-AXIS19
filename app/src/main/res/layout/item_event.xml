@@ -24,7 +24,10 @@
             android:textSize="13dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="Event Name"/>
+            android:fontFamily="@font/marketdeco"
+            android:text="Event Name"
+            android:textAllCaps="true"
+            android:autoSizeMaxTextSize="20sp"/>
 
     </LinearLayout>
 
