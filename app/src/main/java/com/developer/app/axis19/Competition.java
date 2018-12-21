@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -55,11 +56,13 @@ public class Competition extends Fragment {
         valueEventListener = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+                Toast.makeText(getContext(),"retrieving data",Toast.LENGTH_SHORT).show();
                 for(DataSnapshot ds : dataSnapshot.getChildren()) {
 
                     lst.add((ds.getValue(Event.class)));
                     Log.d("TAG","firebase created event object");
                 }
+                Log.d("Size of list is ","size=" + ((Integer) lst.size()).toString());
                 recyclerView = (RecyclerView)v.findViewById(R.id.competition_recyclerview);
 
                 RecyclerViewAdapter recyclerViewAdapter=new RecyclerViewAdapter(getContext(),lst);
