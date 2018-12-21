@@ -35,13 +35,13 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-//import static com.firebase.ui.auth.ui.AcquireEmailHelper.RC_SIGN_IN;
-
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
+
+//import static com.firebase.ui.auth.ui.AcquireEmailHelper.RC_SIGN_IN;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -115,7 +115,7 @@ public class MainActivity extends AppCompatActivity
         View headerview = navigationView.getHeaderView(0);
         navDrawerUsername = (TextView) headerview.findViewById(R.id.UserName);
         navDrawerUseremailid = (TextView) headerview.findViewById(R.id.AxisId);
-        
+
         mAuthStateListener = new FirebaseAuth.AuthStateListener() {
 
             @Override
@@ -145,7 +145,7 @@ public class MainActivity extends AppCompatActivity
                             if(isNewUser)
                             {
                                 Toast.makeText(MainActivity.this, "Welcome new user!", Toast.LENGTH_SHORT).show();
-                                User user = new User(name, Email, generate_axisid());
+                                User user = new User(name,Email,generate_axisid());
                                 mPushDatabaseReference.child(key).setValue(user);
                                 Intent i = new Intent(MainActivity.this, LoginActivity.class);
                                 startActivity(i);

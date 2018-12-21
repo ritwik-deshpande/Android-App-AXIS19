@@ -15,6 +15,22 @@
       },
       "oauth_client": [
         {
+          "client_id": "282546345277-ib5ui2njkhcad2pedp3jdt34q5l7bfe2.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.developer.app.axis19",
+            "certificate_hash": "c761d843d3f59c531e98660598fea0f532357658"
+          }
+        },
+        {
+          "client_id": "282546345277-k2g818lb8h6lvhcn7v9fu6qugfbpoo03.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.developer.app.axis19",
+            "certificate_hash": "c0db237d79b459fe9a4c15c21a4485caed99c71c"
+          }
+        },
+        {
           "client_id": "282546345277-83a5fgpm6eom44mgk9qgt5glla3p34sb.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -29,8 +45,13 @@
           "status": 1
         },
         "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": []
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "282546345277-83a5fgpm6eom44mgk9qgt5glla3p34sb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         },
         "ads_service": {
           "status": 2

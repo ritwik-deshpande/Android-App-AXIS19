@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -23,6 +24,7 @@ import java.util.List;
 
 public class Competition extends Fragment {
 
+
     View v;
     private RecyclerView recyclerView;
 
@@ -30,8 +32,8 @@ public class Competition extends Fragment {
 
     DatabaseReference rootRef,imagesRef;
     ValueEventListener valueEventListener;
-    
-    
+
+
     public Competition(){
 
     }
@@ -39,6 +41,16 @@ public class Competition extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+    }
+
+
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+
+        v= inflater.inflate(R.layout.competitions_fragment,container,false);
+
         lst  = new ArrayList<>();
         rootRef = FirebaseDatabase.getInstance().getReference();
         imagesRef = rootRef.child("Events").child("Competitions");
@@ -56,8 +68,14 @@ public class Competition extends Fragment {
 
                 RecyclerViewAdapter recyclerViewAdapter=new RecyclerViewAdapter(getContext(),lst);
 
-        recyclerView.setLayoutManager(new GridLayoutManager(getContext(),2));
-        recyclerView.setAdapter(recyclerViewAdapter);
+                recyclerView.setLayoutManager(new GridLayoutManager(getContext(),2));
+                recyclerView.setAdapter(recyclerViewAdapter);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {}
+        };
+        imagesRef.addListenerForSingleValueEvent(valueEventListener);
 
         return v;
 

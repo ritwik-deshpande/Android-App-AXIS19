@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:padding="15dp">
 
 
@@ -14,6 +14,7 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_marginTop="30dp"
+        app:cardBackgroundColor="#808080"
         android:layout_alignParentLeft="true">
 
         <LinearLayout
@@ -40,7 +41,7 @@
                     android:layout_marginLeft="30dp"
                     android:layout_toRightOf="@+id/dp"
                     android:text="Sahish"
-                    android:textColor="#000"
+                    android:textColor="#FFFFFF"
                     android:textSize="20sp" />
 
 
@@ -56,7 +57,7 @@
                 android:layout_marginTop="4dp"
                 android:text="Publicity Incharge"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                android:textColor="@color/colorPrimary"
+                android:textColor="#FFFFFF"
                 android:padding="10dp"/>
 
             <android.support.v7.widget.LinearLayoutCompat
@@ -73,6 +74,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:textColor="#FFFFFF"
                     android:text="Email Id:" />
 
                 <android.support.v7.widget.AppCompatTextView
@@ -80,6 +82,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:textColor="#FFFFFF"
                     android:text="ritwikdeshpande01@gmail.com:" />
 
             </android.support.v7.widget.LinearLayoutCompat>
@@ -99,6 +102,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:textColor="#FFFFFF"
                     android:text="Contact Numer:" />
 
                 <android.support.v7.widget.AppCompatImageButton

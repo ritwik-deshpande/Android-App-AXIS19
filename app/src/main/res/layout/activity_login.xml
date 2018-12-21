@@ -1,125 +1,392 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center_horizontal"
     android:orientation="vertical"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".LoginActivity">
+    tools:context=".LoginActivity"
+    android:background="@drawable/back_ground">
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="3"
-        android:gravity="center_horizontal"
-        android:orientation="vertical">
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center_horizontal">
 
-        <TextView
-            android:id="@+id/status"
-            style="@style/ThemeOverlay.MyTextDetail"
-            android:text="@string/signed_out" />
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="127dp"
+            android:src="@drawable/nav_header"
+            android:layout_marginTop="20dp"
+            />
+        <LinearLayout
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:orientation="horizontal"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_marginTop="20dp"
+                android:text="First Name:"
+                android:textColor="#ffffff"
+                android:fontFamily="@font/marketdeco"
+                android:textSize="20sp"/>
+            <EditText
+                android:id="@+id/firstname"
+                android:inputType="textPersonName"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="20dp"
+                android:textAlignment="center"
+                android:hint="FirstName"
+                android:background="#ffffff"
+                android:fontFamily="@font/marketdeco"
+                android:textSize="20sp"
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:orientation="horizontal"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_marginTop="20dp"
+                android:text="Last Name:"
+                android:textColor="#ffffff"
+                android:fontFamily="@font/marketdeco"
+                android:textSize="20sp"/>
+            <EditText
+                android:id="@+id/lastname"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:inputType="textPersonName"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="20dp"
+                android:textAlignment="center"
+                android:hint="LastName"
+                android:background="#ffffff"
+                android:fontFamily="@font/marketdeco"
+                android:textSize="20sp"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:orientation="horizontal"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_marginTop="20dp"
+                android:text="Date of Birth:"
+                android:textColor="#ffffff"
+                android:fontFamily="@font/marketdeco"
+                android:textSize="20sp"/>
+            <EditText
+                android:id="@+id/dob"
+                android:layout_width="100dp"
+                android:layout_height="40dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="20dp"
+                android:textAlignment="center"
+                android:hint="DD/MM/YYYY"
+                android:background="#ffffff"
+                android:fontFamily="@font/marketdeco"
+                android:textSize="20sp"
+                />
+        </LinearLayout>
 
-        <TextView
-            android:id="@+id/detail"
-            style="@style/ThemeOverlay.MyTextDetail"
-            tools:text="Firebase User ID: 123456789abc" />
+        <LinearLayout
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:orientation="horizontal"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_marginTop="20dp"
+                android:text="Email Id:"
+                android:textColor="#ffffff"
+                android:fontFamily="@font/marketdeco"
+                android:textSize="20sp"/>
+            <EditText
+                android:id="@+id/email"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_marginLeft="10dp"
+                android:inputType="textWebEmailAddress"
+                android:layout_marginTop="20dp"
+                android:hint="xyz@something.com"
+                android:textAlignment="center"
+                android:background="#ffffff"
+                android:fontFamily="@font/marketdeco"
+                android:textSize="20sp"
+                />
+        </LinearLayout>
+
+
+
+        <LinearLayout
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:orientation="horizontal"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_marginTop="20dp"
+                android:text="Gender:"
+                android:textColor="#ffffff"
+                android:fontFamily="@font/marketdeco"
+                android:textSize="20sp"/>
+            <RadioGroup
+                android:id="@+id/gender"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true">
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#ffffff"
+                    android:text="Male"
+                    />
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#ffffff"
+                    android:text="Female"
+                    />
+            </RadioGroup>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:orientation="horizontal"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_marginTop="20dp"
+                android:text="College Name:"
+                android:textColor="#ffffff"
+                android:fontFamily="@font/marketdeco"
+                android:textSize="20sp"/>
+            <EditText
+                android:id="@+id/college"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="20dp"
+                android:hint="College_Name:"
+                android:textAlignment="center"
+                android:background="#ffffff"
+                android:fontFamily="@font/marketdeco"
+                android:textSize="20sp"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:orientation="horizontal"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_marginTop="20dp"
+                android:text="Contact No;"
+                android:textColor="#ffffff"
+                android:fontFamily="@font/marketdeco"
+                android:textSize="20sp"/>
+            <EditText
+                android:id="@+id/contactno"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:inputType="phone"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="20dp"
+                android:hint="contact_no:"
+                android:textAlignment="center"
+                android:background="#ffffff"
+                android:fontFamily="@font/marketdeco"
+                android:textSize="20sp"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:orientation="horizontal"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_marginTop="20dp"
+                android:text="Address;"
+                android:textColor="#ffffff"
+                android:fontFamily="@font/marketdeco"
+                android:textSize="20sp"/>
+            <EditText
+                android:id="@+id/address"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="20dp"
+                android:inputType="textMultiLine"
+                android:ems="10"
+                android:lines="5"
+                android:hint="Enter your address:"
+                android:textAlignment="center"
+                android:background="#ffffff"
+                android:fontFamily="@font/marketdeco"
+                android:textSize="20sp"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:orientation="horizontal"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_marginTop="20dp"
+                android:text="Zip Code;"
+                android:textColor="#ffffff"
+                android:fontFamily="@font/marketdeco"
+                android:textSize="20sp"/>
+            <EditText
+                android:id="@+id/zipcode"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="20dp"
+                android:inputType="number"
+                android:hint="Enter zipcode:"
+                android:textAlignment="center"
+                android:background="#ffffff"
+                android:fontFamily="@font/marketdeco"
+                android:textSize="20sp"
+                />
+        </LinearLayout>
+
+
+
+
+        <!--<EditText-->
+            <!--android:id="@+id/zipcode"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="40dp"-->
+            <!--android:layout_marginTop="20dp"-->
+            <!--android:hint="Zip Code"-->
+            <!--android:background="#ffffff"-->
+            <!--android:fontFamily="@font/marketdeco"-->
+            <!--android:textSize="20sp"-->
+            <!--/>-->
+        <!--<EditText-->
+            <!--android:id="@+id/country"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="40dp"-->
+            <!--android:layout_marginTop="20dp"-->
+            <!--android:hint="Country"-->
+            <!--android:background="#ffffff"-->
+            <!--android:fontFamily="@font/marketdeco"-->
+            <!--android:textSize="20sp"-->
+            <!--/>-->
+        <Button
+            android:id="@+id/submit"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_marginTop="20dp"
+            android:text="SUBMIT"/>
+
+
 
     </LinearLayout>
 
+    </ScrollView>
+    
+    <!--<LinearLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="0dp"-->
+        <!--android:layout_weight="3"-->
+        <!--android:gravity="center_horizontal"-->
+        <!--android:orientation="vertical">-->
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:background="@color/grey_300"
-        android:gravity="center_vertical">
+        <!--<TextView-->
+            <!--android:id="@+id/status"-->
+            <!--style="@style/ThemeOverlay.MyTextDetail"-->
+            <!--android:text="@string/signed_out" />-->
 
-        <LinearLayout
-            android:id="@+id/emailPasswordFields"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:paddingLeft="16dp"
-            android:paddingRight="16dp">
+        <!--<TextView-->
+            <!--android:id="@+id/detail"-->
+            <!--style="@style/ThemeOverlay.MyTextDetail"-->
+            <!--tools:text="Firebase User ID: 123456789abc" />-->
 
-            <EditText
-                android:id="@+id/fieldEmail"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:hint="@string/hint_email"
-                android:inputType="textEmailAddress" />
+    <!--</LinearLayout>-->
 
-            <EditText
-                android:id="@+id/fieldPassword"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:hint="@string/hint_password"
-                android:inputType="textPassword" />
-        </LinearLayout>
 
-        <LinearLayout
-            android:id="@+id/emailPasswordButtons"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/emailPasswordFields"
-            android:orientation="horizontal"
-            android:paddingLeft="16dp"
-            android:paddingRight="16dp">
+    <!--<RelativeLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="0dp"-->
+        <!--android:layout_weight="1"-->
+        <!--android:background="@color/grey_300"-->
+        <!--android:gravity="center_vertical">-->
 
-            <Button
-                android:id="@+id/emailSignInButton"
-                style="@style/Widget.AppCompat.Button.Colored"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/sign_in"
-                android:theme="@style/ThemeOverlay.MyDarkButton" />
+        <!--<LinearLayout-->
+            <!--android:id="@+id/emailPasswordFields"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:orientation="horizontal"-->
+            <!--android:paddingLeft="16dp"-->
+            <!--android:paddingRight="16dp">-->
 
-            <Button
-                android:id="@+id/emailCreateAccountButton"
-                style="@style/Widget.AppCompat.Button.Colored"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/create_account"
-                android:theme="@style/ThemeOverlay.MyDarkButton" />
-        </LinearLayout>
+            <!--<EditText-->
+                <!--android:id="@+id/fieldEmail"-->
+                <!--android:layout_width="0dp"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_weight="1"-->
+                <!--android:hint="@string/hint_email"-->
+                <!--android:inputType="textEmailAddress" />-->
 
-        <LinearLayout
-            android:id="@+id/signedInButtons"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:orientation="horizontal"
-            android:paddingLeft="16dp"
-            android:paddingRight="16dp"
-            android:visibility="gone"
-            android:weightSum="2.0">
+            <!--<EditText-->
+                <!--android:id="@+id/fieldPassword"-->
+                <!--android:layout_width="0dp"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_weight="1"-->
+                <!--android:hint="@string/hint_password"-->
+                <!--android:inputType="textPassword" />-->
+        <!--</LinearLayout>-->
 
-            <Button
-                android:id="@+id/signOutButton"
-                style="@style/Widget.AppCompat.Button.Colored"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1.0"
-                android:text="@string/sign_out"
-                android:theme="@style/ThemeOverlay.MyDarkButton" />
+        <!--<LinearLayout-->
+            <!--android:id="@+id/emailPasswordButtons"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_below="@+id/emailPasswordFields"-->
+            <!--android:orientation="horizontal"-->
+            <!--android:paddingLeft="16dp"-->
+            <!--android:paddingRight="16dp">-->
 
-            <Button
-                android:id="@+id/verifyEmailButton"
-                style="@style/Widget.AppCompat.Button.Colored"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1.0"
-                android:text="@string/verify_email"
-                android:theme="@style/ThemeOverlay.MyDarkButton" />
+            <!--<Button-->
+                <!--android:id="@+id/emailSignInButton"-->
+                <!--style="@style/Widget.AppCompat.Button.Colored"-->
+                <!--android:layout_width="0dp"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_weight="1"-->
+                <!--android:text="@string/sign_in"-->
+                <!--android:theme="@style/ThemeOverlay.MyDarkButton" />-->
 
-        </LinearLayout>
-
-    </RelativeLayout>
-</LinearLayout>
+            <!--<Button-->
+                <!--android:id="@+id/emailCreateAccountButton"-->
+                <!--style="@style/Widget.AppCompat.Button.Colored"-->
+                <!--android:layout_width="0dp"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_weight="1"-->
+                <!--android:text="@string/create_account"-->
+                <!--android:theme="@style/ThemeOverlay.MyDarkButton" />-->
