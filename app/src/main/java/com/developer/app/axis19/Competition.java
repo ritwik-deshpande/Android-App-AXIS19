@@ -24,6 +24,7 @@ import java.util.List;
 
 public class Competition extends Fragment {
 
+
     View v;
     private RecyclerView recyclerView;
 
@@ -31,8 +32,8 @@ public class Competition extends Fragment {
 
     DatabaseReference rootRef,imagesRef;
     ValueEventListener valueEventListener;
-    
-    
+
+
     public Competition(){
 
     }
