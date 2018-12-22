@@ -67,7 +67,7 @@ public class MainActivity extends AppCompatActivity
     private DatabaseReference mPushDatabaseReference;
 
     public static int valid = 0;
-    public static String Email, name;
+    public static String Email, name, axisid;
     TextView navDrawerUsername, navDrawerUseremailid;
     private static final String TAG = "MainActivity";
 
@@ -124,6 +124,7 @@ public class MainActivity extends AppCompatActivity
                 if (user != null) {
                     Email = user.getEmail();
                     name = user.getDisplayName();
+
                     mDatabaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
                         String key = getUser_key(Email);
                         @Override
@@ -134,10 +135,11 @@ public class MainActivity extends AppCompatActivity
                                 if (key.equals(x)) {
                                     Toast.makeText(MainActivity.this, "Welcome back!", Toast.LENGTH_SHORT).show();
                                     isNewUser = false;
-                                    if((long)snapshot.child("phone").getValue() == -1)
+                                    if(snapshot.child("phone").getValue().equals("NULL"))
                                     {
-                                        //Intent i = new Intent(MainActivity.this, LoginActivity.class);
-                                        //startActivity(i);
+                                        axisid = (String) snapshot.child("axisid").getValue();
+                                        Intent i = new Intent(MainActivity.this, LoginActivity.class);
+                                        startActivity(i);
                                     }
                                     break;
                                 }
@@ -145,9 +147,13 @@ public class MainActivity extends AppCompatActivity
                             if(isNewUser)
                             {
                                 Toast.makeText(MainActivity.this, "Welcome new user!", Toast.LENGTH_SHORT).show();
-                                User user = new User(name,Email,generate_axisid());
+                                axisid = generate_axisid();
+                                User user = new User(name,Email,axisid);
                                 mPushDatabaseReference.child(key).setValue(user);
                                 Intent i = new Intent(MainActivity.this, LoginActivity.class);
+                                i.putExtra("username" , name);
+                                i.putExtra("email" , Email);
+                                i.putExtra("axisid", axisid);
                                 startActivity(i);
 
                             }

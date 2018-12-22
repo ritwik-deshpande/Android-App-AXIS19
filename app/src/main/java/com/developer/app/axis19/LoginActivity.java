@@ -2,43 +2,59 @@ package com.developer.app.axis19;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.Calendar;
+
+import static com.developer.app.axis19.MainActivity.Email;
 
 /**
  * A login screen that offers login via email/password.
  */
 public class LoginActivity extends AppCompatActivity  {
 
-    private static final String TAG = "EmailPassword";
+    private static final String TAG = "LoginForm";
 
-    EditText fname;
-    EditText lname;
-    EditText email;
-    EditText gender;
-    EditText address;
-    EditText country;
+    String username;
+    String email;
+    String axisid;
+    String college;
+    String country;
+    String DOB;
+    String address;
+    String gender;
+    String phone;
+    String zipcode;
     EditText dob;
     Calendar c;
     Button submit;
+    User login_user;
 
-
-
+    RadioGroup radioGroup;
+    private FirebaseDatabase mFirebaseDatabase;
+    private DatabaseReference mDatabaseReference;
+    private DatabaseReference mPushDatabaseReference;
     DatePickerDialog dpd;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         submit=(Button)findViewById(R.id.submit);
-        fname=(EditText)findViewById(R.id.firstname);
-        String dbfname=fname.getText().toString();
         dob=(EditText)findViewById(R.id.dob);
         dob.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -61,14 +77,42 @@ public class LoginActivity extends AppCompatActivity  {
                 dpd.show();
             }
         });
+
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                username = MainActivity.name;
+                email = Email;
+                axisid = MainActivity.axisid;
+                college = ((EditText)findViewById(R.id.college)).getText().toString();
+                country = ((EditText)findViewById(R.id.country)).getText().toString();
+                address = ((EditText)findViewById(R.id.address)).getText().toString();
+                radioGroup = ((RadioGroup)findViewById(R.id.gender));
+                int selectedId = radioGroup.getCheckedRadioButtonId();
+                // find the radiobutton by returned id
+                gender = ((RadioButton) findViewById(selectedId)).getText().toString();
+
+                phone = ((EditText)findViewById(R.id.contactno)).getText().toString();
+                zipcode = ((EditText)findViewById(R.id.zipcode)).getText().toString();
+                DOB  = dob.getText().toString();
+                login_user = new User(username, email,axisid,college,country, DOB,address,gender,phone,zipcode);
+                mFirebaseDatabase = FirebaseDatabase.getInstance();
+                //mDatabaseReference = mFirebaseDatabase.getReference().child("users");
+                mPushDatabaseReference = mFirebaseDatabase.getReference().child("users");
+                String key = getUser_key(Email);
+                mPushDatabaseReference.child(key).setValue(login_user);
                 Intent i = new Intent(LoginActivity.this,MainActivity.class);
                 startActivity(i);
             }
         });
 
+    }
+
+    public String getUser_key(String email)
+    {
+        email = email.substring(0,email.indexOf('@'));
+        email.replaceAll(".","");
+        return email;
     }
 
 }
