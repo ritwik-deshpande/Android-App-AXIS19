@@ -1,5 +1,6 @@
 package com.developer.app.axis19;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -9,6 +10,8 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.AnimationUtils;
+import android.view.animation.LayoutAnimationController;
 
 import java.util.ArrayList;
 
@@ -17,6 +20,7 @@ public class coreteam extends AppCompatActivity {
     String TAG ="CoreTeamActivity";
     View v;
     private RecyclerView recyclerView;
+    private RecycleViewAdapterTeam r;
 
     ArrayList<Profile> lst = new ArrayList<>();
 
@@ -36,7 +40,8 @@ public class coreteam extends AppCompatActivity {
             }
         });
 
-        initProfile();
+        runAnimation(0);
+
     }
 
     void initProfile(){
@@ -53,10 +58,31 @@ public class coreteam extends AppCompatActivity {
 
     void initRecyclerView(){
         Log.d(TAG,"Inisde Init Recycler View");
-        RecyclerView recyclerView= findViewById(R.id.ct_recyclerview);
-        RecycleViewAdapterTeam r=new RecycleViewAdapterTeam(lst,this);
+        recyclerView= findViewById(R.id.ct_recyclerview);
+        r=new RecycleViewAdapterTeam(lst,this);
         recyclerView.setAdapter(r);
         recyclerView.setLayoutManager(new GridLayoutManager(this,1));
+
+    }
+
+    private void runAnimation(int type) {
+
+
+        initProfile();
+        Context context = recyclerView.getContext();
+        LayoutAnimationController controller=null;
+
+        // 0 denotes fall_down animation
+        if(type==0){
+            controller= AnimationUtils.loadLayoutAnimation(this,R.anim.item_falldown_animation);
+        }
+
+
+        //Set animations
+        Log.d("CoreTeam","Setting Animations");
+        recyclerView.setLayoutAnimation(controller);
+        recyclerView.getAdapter().notifyDataSetChanged();
+        recyclerView.scheduleLayoutAnimation();
 
     }
 }

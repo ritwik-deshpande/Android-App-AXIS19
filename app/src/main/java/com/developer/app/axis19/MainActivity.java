@@ -147,8 +147,9 @@ public class MainActivity extends AppCompatActivity
                             if(isNewUser)
                             {
                                 Toast.makeText(MainActivity.this, "Welcome new user!", Toast.LENGTH_SHORT).show();
+
                                 axisid = generate_axisid();
-                                User user = new User(name,Email,axisid);
+                                User user = new User(name,Email,axisid);                     
                                 mPushDatabaseReference.child(key).setValue(user);
                                 Intent i = new Intent(MainActivity.this, LoginActivity.class);
                                 i.putExtra("username" , name);
@@ -179,7 +180,7 @@ public class MainActivity extends AppCompatActivity
 
                 } else {
                     // User is signed out
-                    Toast.makeText(MainActivity.this, "user signed out", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this, "User signed out", Toast.LENGTH_SHORT).show();
                     List<AuthUI.IdpConfig> providers = Arrays.asList(
                             new AuthUI.IdpConfig.GoogleBuilder().build());
                     startActivityForResult(

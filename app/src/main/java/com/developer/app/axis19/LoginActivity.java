@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
@@ -21,10 +22,12 @@ import java.util.Calendar;
 
 import static com.developer.app.axis19.MainActivity.Email;
 
+
 /**
  * A login screen that offers login via email/password.
  */
 public class LoginActivity extends AppCompatActivity  {
+
 
     private static final String TAG = "LoginForm";
 
@@ -50,11 +53,13 @@ public class LoginActivity extends AppCompatActivity  {
     DatePickerDialog dpd;
 
 
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         submit=(Button)findViewById(R.id.submit);
+
         dob=(EditText)findViewById(R.id.dob);
         dob.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -69,6 +74,7 @@ public class LoginActivity extends AppCompatActivity  {
                     @Override
                     public void onDateSet(DatePicker datePicker, int day, int month, int year) {
 
+
                         month++;
                         dob.setText(year+"/"+month+"/"+day);
 
@@ -77,6 +83,7 @@ public class LoginActivity extends AppCompatActivity  {
                 dpd.show();
             }
         });
+
 
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -101,12 +108,14 @@ public class LoginActivity extends AppCompatActivity  {
                 mPushDatabaseReference = mFirebaseDatabase.getReference().child("users");
                 String key = getUser_key(Email);
                 mPushDatabaseReference.child(key).setValue(login_user);
+       
                 Intent i = new Intent(LoginActivity.this,MainActivity.class);
                 startActivity(i);
             }
         });
 
     }
+
 
     public String getUser_key(String email)
     {
@@ -115,5 +124,6 @@ public class LoginActivity extends AppCompatActivity  {
         return email;
     }
 
+r
 }
 
