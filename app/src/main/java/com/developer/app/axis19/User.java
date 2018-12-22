@@ -10,21 +10,35 @@ public class User {
     private String DOB;
     private String address;
     private String gender;
-    private long phone;
-    private long zipcode;
+    private String phone;
+    private String zipcode;
 
     public User(String username, String email, String axisid)
     {
         this.username = username;
         this.email = email;
         this.axisid = axisid;
-        this.address = null;
-        this.college = null;
-        this.country = null;
-        this.gender = null;
-        this.DOB = null;
-        this.phone = -1;
-        this.zipcode = -1;
+        this.address = "NULL";
+        this.college = "NULL";
+        this.country = "NULL";
+        this.gender = "NULL";
+        this.DOB = "NULL";
+        this.phone = "NULL";
+        this.zipcode = "NULL";
+    }
+
+    public User(String username, String email, String axisid, String college, String country,
+                String DOB, String address, String gender, String phone, String zipcode) {
+        this.username = username;
+        this.email = email;
+        this.axisid = axisid;
+        this.college = college;
+        this.country = country;
+        this.DOB = DOB;
+        this.address = address;
+        this.gender = gender;
+        this.phone = phone;
+        this.zipcode = zipcode;
     }
 
     public String getEmail() {
@@ -83,19 +97,19 @@ public class User {
         this.gender = gender;
     }
 
-    public long getPhone() {
+    public String getPhone() {
         return phone;
     }
 
-    public void setPhone(long phone) {
+    public void setPhone(String phone) {
         this.phone = phone;
     }
 
-    public long getZipcode() {
+    public String getZipcode() {
         return zipcode;
     }
 
-    public void setZipcode(long zipcode) {
+    public void setZipcode(String zipcode) {
         this.zipcode = zipcode;
     }
 
