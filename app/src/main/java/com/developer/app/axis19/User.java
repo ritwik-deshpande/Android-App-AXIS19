@@ -1,6 +1,5 @@
 package com.developer.app.axis19;
 
-
 public class User {
 
     private String username;
