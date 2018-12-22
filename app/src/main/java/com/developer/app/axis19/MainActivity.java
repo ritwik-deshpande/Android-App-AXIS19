@@ -136,8 +136,8 @@ public class MainActivity extends AppCompatActivity
                                     isNewUser = false;
                                     if((long)snapshot.child("phone").getValue() == -1)
                                     {
-                                        Intent i = new Intent(MainActivity.this, LoginActivity.class);
-                                        startActivity(i);
+                                        //Intent i = new Intent(MainActivity.this, LoginActivity.class);
+                                        //startActivity(i);
                                     }
                                     break;
                                 }
