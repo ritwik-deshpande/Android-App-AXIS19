@@ -173,7 +173,7 @@ public class MainActivity extends AppCompatActivity
 
                 } else {
                     // User is signed out
-                    Toast.makeText(MainActivity.this, "user signed out", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this, "User signed out", Toast.LENGTH_SHORT).show();
                     List<AuthUI.IdpConfig> providers = Arrays.asList(
                             new AuthUI.IdpConfig.GoogleBuilder().build());
                     startActivityForResult(
