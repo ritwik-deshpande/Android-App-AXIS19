@@ -1,5 +1,6 @@
 package com.developer.app.axis19;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -10,6 +11,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AnimationUtils;
+import android.view.animation.LayoutAnimationController;
 import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
@@ -42,6 +45,7 @@ public class Competition extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+
     }
 
 
@@ -70,6 +74,7 @@ public class Competition extends Fragment {
 
                 recyclerView.setLayoutManager(new GridLayoutManager(getContext(),2));
                 recyclerView.setAdapter(recyclerViewAdapter);
+                //runAnimation(recyclerView,0);
             }
 
             @Override
@@ -77,7 +82,28 @@ public class Competition extends Fragment {
         };
         imagesRef.addListenerForSingleValueEvent(valueEventListener);
 
+
+       // runAnimation(recyclerView,0);
+
+
         return v;
+
+    }
+
+    private void runAnimation(RecyclerView recyclerView, int type) {
+
+        Context context = recyclerView.getContext();
+        LayoutAnimationController controller=null;
+
+        // 0 denotes fall_down animation
+        if(type==0){
+            controller= AnimationUtils.loadLayoutAnimation(context,R.anim.item_falldown_animation);
+
+        }
+
+        recyclerView.setLayoutAnimation(controller);
+        //recyclerView.getAdapter().notifyDataSetChanged();
+        recyclerView.scheduleLayoutAnimation();
 
     }
 }
