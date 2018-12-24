@@ -1,5 +1,8 @@
 package com.developer.app.axis19;
 
+import java.util.Date;
+import java.util.GregorianCalendar;
+
 public class Event {
     private String EventName;
     private String OName1;
@@ -8,9 +11,34 @@ public class Event {
     private String img_url;
     private long phone1;
     private long phone2;
+    Date date;
+    private String venue;
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+
+
+
+    public String getVenue() {
+        return venue;
+    }
+
+    public void setVenue(String venue) {
+        this.venue = venue;
+    }
 
     public Event(){
         //important to keep a no atg constructor
+
+        // please change here when adding from database
+        date = new GregorianCalendar(2019,02,30,10,30).getTime();
+        this.venue="VNIT,CSE Department";
     }
 
     public long getPhone1() {
@@ -72,6 +100,11 @@ public class Event {
         this.img_url=image;
         this.phone1=phone1;
         this.phone2=phone2;
+
+        // please change here when adding from database
+        date = new GregorianCalendar(2019,02,30,10,30).getTime();
+        this.venue="VNIT,CSE Department";
+
     }
 
     public void setEventName(String eventName) {
