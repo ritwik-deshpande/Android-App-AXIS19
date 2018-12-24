@@ -11,6 +11,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
@@ -44,9 +45,8 @@ public class LoginActivity extends AppCompatActivity  {
     User login_user;
 
     RadioGroup radioGroup;
-    private FirebaseDatabase mFirebaseDatabase;
-    private DatabaseReference mDatabaseReference;
-    private DatabaseReference mPushDatabaseReference;
+    private DatabaseHelper db;
+    private UtilFunctions utilFunctions;
     DatePickerDialog dpd;
 
 
@@ -54,6 +54,7 @@ public class LoginActivity extends AppCompatActivity  {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        db = new DatabaseHelper();
         submit=(Button)findViewById(R.id.submit);
         dob=(EditText)findViewById(R.id.dob);
         dob.setOnClickListener(new View.OnClickListener() {
@@ -83,6 +84,8 @@ public class LoginActivity extends AppCompatActivity  {
             public void onClick(View view) {
                 username = MainActivity.name;
                 email = Email;
+                ((TextView)findViewById(R.id.email)).setText(email);
+                ((TextView)findViewById(R.id.username)).setText(username);
                 axisid = MainActivity.axisid;
                 college = ((EditText)findViewById(R.id.college)).getText().toString();
                 country = ((EditText)findViewById(R.id.country)).getText().toString();
@@ -96,11 +99,7 @@ public class LoginActivity extends AppCompatActivity  {
                 zipcode = ((EditText)findViewById(R.id.zipcode)).getText().toString();
                 DOB  = dob.getText().toString();
                 login_user = new User(username, email,axisid,college,country, DOB,address,gender,phone,zipcode);
-                mFirebaseDatabase = FirebaseDatabase.getInstance();
-                //mDatabaseReference = mFirebaseDatabase.getReference().child("users");
-                mPushDatabaseReference = mFirebaseDatabase.getReference().child("users");
-                String key = getUser_key(Email);
-                mPushDatabaseReference.child(key).setValue(login_user);
+                db.createUser(login_user);
                 Intent i = new Intent(LoginActivity.this,MainActivity.class);
                 startActivity(i);
             }
