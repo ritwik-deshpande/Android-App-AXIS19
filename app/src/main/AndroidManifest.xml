@@ -46,6 +46,10 @@
             android:name=".coreteam"
             android:label="Core Team"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".MyRegistration"
+            android:label="@string/title_activity_my_registration"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
