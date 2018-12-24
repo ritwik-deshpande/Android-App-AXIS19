@@ -28,49 +28,21 @@
                 android:layout_width="wrap_content"
                 android:layout_height="40dp"
                 android:layout_marginTop="20dp"
-                android:text="First Name:"
+                android:text="Name:"
                 android:textColor="#ffffff"
                 android:fontFamily="@font/marketdeco"
                 android:textSize="20sp"/>
-            <EditText
-                android:id="@+id/firstname"
-                android:inputType="textPersonName"
+            <TextView
+                android:id="@+id/username"
                 android:layout_width="wrap_content"
                 android:layout_height="40dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="20dp"
                 android:textAlignment="center"
-                android:hint="FirstName"
-                android:background="#ffffff"
+                android:textColor="#ffffff"
                 android:fontFamily="@font/marketdeco"
                 android:textSize="20sp"
                 />
-        </LinearLayout>
-        <LinearLayout
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:orientation="horizontal"
-            >
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="40dp"
-                android:layout_marginTop="20dp"
-                android:text="Last Name:"
-                android:textColor="#ffffff"
-                android:fontFamily="@font/marketdeco"
-                android:textSize="20sp"/>
-            <EditText
-                android:id="@+id/lastname"
-                android:layout_width="wrap_content"
-                android:layout_height="40dp"
-                android:inputType="textPersonName"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="20dp"
-                android:textAlignment="center"
-                android:hint="LastName"
-                android:background="#ffffff"
-                android:fontFamily="@font/marketdeco"
-                android:textSize="20sp"/>
         </LinearLayout>
         <LinearLayout
             android:layout_height="wrap_content"
@@ -112,14 +84,12 @@
                 android:textColor="#ffffff"
                 android:fontFamily="@font/marketdeco"
                 android:textSize="20sp"/>
-            <EditText
+            <TextView
                 android:id="@+id/email"
                 android:layout_width="wrap_content"
                 android:layout_height="40dp"
                 android:layout_marginLeft="10dp"
-                android:inputType="textWebEmailAddress"
                 android:layout_marginTop="20dp"
-                android:hint="xyz@something.com"
                 android:textAlignment="center"
                 android:background="#ffffff"
                 android:fontFamily="@font/marketdeco"

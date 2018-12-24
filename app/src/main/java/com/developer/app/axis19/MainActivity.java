@@ -40,8 +40,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
-
-//import static com.firebase.ui.auth.ui.AcquireEmailHelper.RC_SIGN_IN;
+import com.developer.app.axis19.UtilFunctions;
+import com.developer.app.axis19.DatabaseHelper;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -65,6 +65,9 @@ public class MainActivity extends AppCompatActivity
     private DatabaseReference mDatabaseReference;
     private ValueEventListener mValueEventListener;
     private DatabaseReference mPushDatabaseReference;
+
+    private DatabaseHelper db;
+    private UtilFunctions utilFunctions;
 
     public static int valid = 0;
     public static String Email, name, axisid;
@@ -95,7 +98,8 @@ public class MainActivity extends AppCompatActivity
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
-
+        utilFunctions = new UtilFunctions();
+        db = new DatabaseHelper();
 
         navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
@@ -116,6 +120,26 @@ public class MainActivity extends AppCompatActivity
         navDrawerUsername = (TextView) headerview.findViewById(R.id.UserName);
         navDrawerUseremailid = (TextView) headerview.findViewById(R.id.AxisId);
 
+        onauthchange();
+        tabLayout = (TabLayout) findViewById(R.id.tabLayout_id);
+        viewPager = (ViewPager) findViewById(R.id.viewpager_id);
+        viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
+
+        // Adding Fragments
+
+        viewPagerAdapter.addFragment(new News(), "News and More");
+        viewPagerAdapter.addFragment(new Competition(), "Competitions");
+        viewPagerAdapter.addFragment(new guestlectures(), "Guest Lectures");
+        viewPagerAdapter.addFragment(new Informals(), "Informals");
+
+
+        viewPager.setAdapter(viewPagerAdapter);
+        tabLayout.setupWithViewPager(viewPager);
+
+    }
+
+    public void onauthchange()
+    {
         mAuthStateListener = new FirebaseAuth.AuthStateListener() {
 
             @Override
@@ -126,7 +150,7 @@ public class MainActivity extends AppCompatActivity
                     name = user.getDisplayName();
 
                     mDatabaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
-                        String key = getUser_key(Email);
+                        String key = utilFunctions.getUser_key(Email);
                         @Override
                         public void onDataChange(DataSnapshot dataSnapshot) {
                             isNewUser = true;
@@ -147,10 +171,10 @@ public class MainActivity extends AppCompatActivity
                             if(isNewUser)
                             {
                                 Toast.makeText(MainActivity.this, "Welcome new user!", Toast.LENGTH_SHORT).show();
-
-                                axisid = generate_axisid();
-                                User user = new User(name,Email,axisid);                     
-                                mPushDatabaseReference.child(key).setValue(user);
+                                axisid = utilFunctions.generate_axisid();
+                                User user = new User(name,Email,axisid);
+                                //mPushDatabaseReference.child(key).setValue(user);
+                                db.createUser(user);
                                 Intent i = new Intent(MainActivity.this, LoginActivity.class);
                                 i.putExtra("username" , name);
                                 i.putExtra("email" , Email);
@@ -165,22 +189,14 @@ public class MainActivity extends AppCompatActivity
 
                         }
                     });
-                    // Code to save userdata
-                    Log.v("Userdetails", user.getDisplayName() + " " + user.getEmail());
-                    sp.putString("name", user.getDisplayName());
-                    sp.putString("email", user.getEmail());
-                    sp.putString("profile", user.getPhotoUrl().toString());
-                    sp.putString("UID", user.getUid());
+
                     navDrawerUsername.setText((String) user.getDisplayName());
                     navDrawerUseremailid.setText((String) user.getEmail());
-
-                    sp.commit();
-
 
 
                 } else {
                     // User is signed out
-                    Toast.makeText(MainActivity.this, "User signed out", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this, "user signed out", Toast.LENGTH_SHORT).show();
                     List<AuthUI.IdpConfig> providers = Arrays.asList(
                             new AuthUI.IdpConfig.GoogleBuilder().build());
                     startActivityForResult(
@@ -196,23 +212,7 @@ public class MainActivity extends AppCompatActivity
         };
 
 
-        tabLayout = (TabLayout) findViewById(R.id.tabLayout_id);
-        viewPager = (ViewPager) findViewById(R.id.viewpager_id);
-        viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
-
-        // Adding Fragments
-
-        viewPagerAdapter.addFragment(new News(), "News and More");
-        viewPagerAdapter.addFragment(new Competition(), "Competitions");
-        viewPagerAdapter.addFragment(new guestlectures(), "Guest Lectures");
-        viewPagerAdapter.addFragment(new Informals(), "Informals");
-
-
-        viewPager.setAdapter(viewPagerAdapter);
-        tabLayout.setupWithViewPager(viewPager);
-
     }
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -351,25 +351,6 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
-    public String getUser_key(String email)
-    {
-        email = email.substring(0,email.indexOf('@'));
-        email.replaceAll(".","");
-        return email;
-    }
 
-    public String generate_axisid()
-    {
-        Random rand = new Random();
-        Calendar c = Calendar.getInstance();
-        Date today = c.getTime();
-        String t = today.toString();
-        t = t.split("")[3];
-        long milisecond = today.getTime()%1000;
-        long r = (rand.nextInt(999)+100)%1000;
-        long id = ((long)Math.pow(r,2) +(long) Math.pow(milisecond,2) ) %1000;
-        String axisid = "AXIS19" + t + ((id < 100)?'0': ((id<10)?"00":"") )+ id;
-        return axisid;
-    }
 }
 
