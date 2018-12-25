@@ -46,9 +46,9 @@ public class MyRegistration extends AppCompatActivity {
 
     void initMyReg(){
         String img_url;
-        lst.add(new Event("Insomnia","Kapeel","Sanika","Coding Event","https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRUq0PqbjaMU2LTh5HaeKvGJgYs5UR1AQtkxtOehqCU3t22amRg",9868696,89868878));
-        lst.add(new Event("Insomnia","Kapeel","Sanika","Coding Event","https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRUq0PqbjaMU2LTh5HaeKvGJgYs5UR1AQtkxtOehqCU3t22amRg",9868696,89868878));
-        lst.add(new Event("Insomnia","Kapeel","Sanika","Coding Event","https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRUq0PqbjaMU2LTh5HaeKvGJgYs5UR1AQtkxtOehqCU3t22amRg",9868696,89868878));
+        lst.add(new Event("Insomnia","Kapeel","Sanika","Coding Event","https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRUq0PqbjaMU2LTh5HaeKvGJgYs5UR1AQtkxtOehqCU3t22amRg",9868696,89868878,"grxth","31/2/7"));
+        lst.add(new Event("Insomnia","Kapeel","Sanika","Coding Event","https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRUq0PqbjaMU2LTh5HaeKvGJgYs5UR1AQtkxtOehqCU3t22amRg",9868696,89868878,"grxth","31/2/7"));
+        lst.add(new Event("Insomnia","Kapeel","Sanika","Coding Event","https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRUq0PqbjaMU2LTh5HaeKvGJgYs5UR1AQtkxtOehqCU3t22amRg",9868696,89868878,"grxth","31/2/7"));
         initRecyclerView();
 
     }

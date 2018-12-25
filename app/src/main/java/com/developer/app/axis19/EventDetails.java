@@ -34,6 +34,19 @@ public class EventDetails extends AppCompatActivity {
 
     private static final String TAG="EventDetails";
     private String[] months = {"January", "February", "March","April","May","June","July","August","September","October","November","December"};
+    private DatabaseHelper db;
+
+    String event_img_url;
+    String eventName;
+    String category;
+    String OName1;
+    String OName2;
+    long phone1;
+    long phone2;
+    String eventDesc;
+    Date date;
+    String venue;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +54,7 @@ public class EventDetails extends AppCompatActivity {
         setContentView(R.layout.activity_event_details);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
+        db = new DatabaseHelper();
         Log.d(TAG,"on Create called");
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -58,76 +71,87 @@ public class EventDetails extends AppCompatActivity {
         AppCompatImageButton save_person_two = (AppCompatImageButton) findViewById(R.id.save_contact_person_two);
         ImageButton calendar=(ImageButton)findViewById(R.id.calender);
         ImageButton maps=(ImageButton)findViewById(R.id.map);
+        AppCompatButton register_button = (AppCompatButton)findViewById(R.id.reg_button);
+
+        getIncomingIntent();
 
         maps.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(getIntent().hasExtra("OName1") && getIntent().hasExtra("phone1"))
-                    setVenue(getIntent().getStringExtra("Venue"));
 
+                setVenue(venue);
             }
         });
 
         calendar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(getIntent().hasExtra("OName1") && getIntent().hasExtra("phone1"))
-                    setCalendarEvent((Date) getIntent().getSerializableExtra("Date"),getIntent().getStringExtra("EventName"));
+
+                setCalendarEvent((Date) getIntent().getSerializableExtra("Date"),getIntent().getStringExtra("EventName"));
             }
         });
 
         save_person_one.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(getIntent().hasExtra("OName1") && getIntent().hasExtra("phone1"))
-                    save_contact(getIntent().getStringExtra("OName1"),getIntent().getLongExtra("phone1",0));
+
+                save_contact(OName1, phone1);
             }
         });
 
         save_person_two.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(getIntent().hasExtra("OName2") && getIntent().hasExtra("phone2"))
-                    save_contact(getIntent().getStringExtra("OName2"),getIntent().getLongExtra("phone2",0));
+
+                save_contact(OName2,phone2);
             }
         });
         call_person_one.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(getIntent().hasExtra("phone1"))
-                    makePhoneCall(getIntent().getLongExtra("phone1",0));
+
+                    makePhoneCall(phone1);
             }
         });
         call_person_two.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(getIntent().hasExtra("phone2"))
-                    makePhoneCall(getIntent().getLongExtra("phone2",0));
+
+                    makePhoneCall(phone2);
             }
         });
-        getIncomingIntent();
+        register_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(getIntent().hasExtra("category"))
+                    db.registerUser(category,eventName) ;
+                Toast.makeText(EventDetails.this, "Registered Successfully", Toast.LENGTH_SHORT).show();
+            }
+        });
+
     }
     public void getIncomingIntent(){
 
         Log.d(TAG,"Checking for incoming Intent");
-        if(getIntent().hasExtra("EventName") && getIntent().hasExtra("EventName") && getIntent().hasExtra("OName1") && getIntent().hasExtra("OName2") && getIntent().hasExtra("EventDesc") ) {
-            String event_img_url = getIntent().getStringExtra("EventImage");
-            String eventName = getIntent().getStringExtra("EventName");
+        if(getIntent().hasExtra("EventImage") && getIntent().hasExtra("EventName") && getIntent().hasExtra("OName1") && getIntent().hasExtra("OName2") && getIntent().hasExtra("EventDesc") ) {
+            event_img_url = getIntent().getStringExtra("EventImage");
+            eventName = getIntent().getStringExtra("EventName");
+            category = getIntent().getStringExtra("category");
+            OName1 = getIntent().getStringExtra("OName1");
+            OName2 = getIntent().getStringExtra("OName2");
+            phone1 = getIntent().getLongExtra("phone1",0);
+            phone2 = getIntent().getLongExtra("phone2",0);
+            eventDesc = getIntent().getStringExtra("EventDesc");
 
-            String eventO1 = getIntent().getStringExtra("OName1");
-            String eventO2 = getIntent().getStringExtra("OName2");
+            date=(Date) getIntent().getSerializableExtra("Date");
 
-            String eventDesc = getIntent().getStringExtra("EventDesc");
-
-            Date date=(Date) getIntent().getSerializableExtra("Date");
-
-            String venue = getIntent().getStringExtra("Venue");
+            venue = getIntent().getStringExtra("Venue");
 
             Log.d("Tag","The date is:"+date);
 
 
-            Log.d(TAG,"Our Event:\n"+eventName+"\n"+eventDesc+"\n"+eventO1+"\n"+eventO2+"\n" );
-            setEvent(event_img_url, eventName, eventDesc, eventO1, eventO2,date,venue);
+            Log.d(TAG,"Our Event:\n"+eventName+"\n"+eventDesc+"\n"+OName1+"\n"+OName2+"\n" );
+            setEvent(event_img_url, eventName, eventDesc, OName1, OName2, date, venue);
         }
     }
 
@@ -135,12 +159,9 @@ public class EventDetails extends AppCompatActivity {
 
 
         Log.d(TAG,"Setting our event");
-       // TextView textView1=(TextView)findViewById(R.id.event_name);
         setTitle(eventName);
         Log.d(TAG,"Setting our eventName"+eventName);
 //        assert textView1!=null;
-//        textView1.setText(eventName);
-//
         AppCompatTextView textView2=(AppCompatTextView)findViewById(R.id.description_textView);
         assert textView2!=null;
         textView2.setText(eventDesc);
@@ -163,20 +184,12 @@ public class EventDetails extends AppCompatActivity {
 
         int year = calendar.get(Calendar.YEAR);
 
-        textView5.setText(months[month-1]+" "+day+" ,"+year);
+        textView5.setText(months[month]+" "+day+" ,"+year);
 
         AppCompatTextView textView6 =(AppCompatTextView)findViewById(R.id.venue);
 
         textView6.setText(venue);
 
-        AppCompatButton reg_button=(AppCompatButton)findViewById(R.id.reg_button);
-
-        reg_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(EventDetails.this, "Registered Successfully", Toast.LENGTH_SHORT).show();
-            }
-        });
 
        // Glide.with(mContext).load(mResources[position]).fitCenter().into(imageView);
         Glide.with(this).load(event_img_url).into(imageView);

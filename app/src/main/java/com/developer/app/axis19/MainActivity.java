@@ -159,9 +159,9 @@ public class MainActivity extends AppCompatActivity
                                 if (key.equals(x)) {
                                     Toast.makeText(MainActivity.this, "Welcome back!", Toast.LENGTH_SHORT).show();
                                     isNewUser = false;
+                                    axisid = (String) snapshot.child("axisid").getValue();
                                     if(snapshot.child("phone").getValue().equals("NULL"))
                                     {
-                                        axisid = (String) snapshot.child("axisid").getValue();
                                         Intent i = new Intent(MainActivity.this, LoginActivity.class);
                                         startActivity(i);
                                     }

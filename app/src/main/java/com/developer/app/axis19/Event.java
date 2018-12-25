@@ -1,5 +1,6 @@
 package com.developer.app.axis19;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
@@ -11,15 +12,30 @@ public class Event {
     private String img_url;
     private long phone1;
     private long phone2;
-    Date date;
+    private String category;
+    private Date date;
     private String venue;
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
 
     public Date getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    public void setDate(String date) {
+        try {
+            this.date = new SimpleDateFormat("dd/MM/yyyy").parse(date);
+        }catch (Exception e){
+            System.out.println(e.toString());
+            this.date = new GregorianCalendar(2019,02,30,10,30).getTime();
+        }
+        //this.date = date;
     }
 
 
@@ -34,11 +50,7 @@ public class Event {
     }
 
     public Event(){
-        //important to keep a no atg constructor
-
-        // please change here when adding from database
-        date = new GregorianCalendar(2019,02,30,10,30).getTime();
-        this.venue="VNIT,CSE Department";
+        //important to keep a no arg constructor
     }
 
     public long getPhone1() {
@@ -92,7 +104,7 @@ public class Event {
     public void setImg_url(String img_url) {
         this.img_url = img_url;
     }
-    public Event(String eventName, String OName1, String OName2, String desc, String image,long phone1,long phone2) {
+    public Event(String eventName, String OName1, String OName2, String desc, String image,long phone1,long phone2,String venue, String date) {
         EventName = eventName;
         this.OName1 = OName1;
         this.OName2 = OName2;
@@ -101,9 +113,16 @@ public class Event {
         this.phone1=phone1;
         this.phone2=phone2;
 
+        try {
+            this.date = new SimpleDateFormat("dd/MM/yyyy").parse(date);
+        }catch (Exception e){
+            System.out.println(e.toString());
+            this.date = new GregorianCalendar(2019,02,30,10,30).getTime();
+        }
+        System.out.println(date +"\t"+this.date);
         // please change here when adding from database
-        date = new GregorianCalendar(2019,02,30,10,30).getTime();
-        this.venue="VNIT,CSE Department";
+
+        this.venue= venue;
 
     }
 
