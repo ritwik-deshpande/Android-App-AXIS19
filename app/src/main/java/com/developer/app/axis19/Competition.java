@@ -67,7 +67,7 @@ public class Competition extends Fragment {
                     lst.add((ds.getValue(Event.class)));
                     Log.d("TAG","firebase created event object");
                 }
-                Log.d("Size of list is ","size=" + ((Integer) lst.size()).toString());
+                //Log.d("Size of list is ","size=" + ((Integer) lst.size()).toString());
                 recyclerView = (RecyclerView)v.findViewById(R.id.competition_recyclerview);
 
                 RecyclerViewAdapter recyclerViewAdapter=new RecyclerViewAdapter(getContext(),lst);

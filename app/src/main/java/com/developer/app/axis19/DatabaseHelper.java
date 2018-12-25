@@ -8,49 +8,61 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import static com.developer.app.axis19.MainActivity.Email;
+import static com.developer.app.axis19.MainActivity.axisid;
 //import com.developer.app.axis19.UtilFunctions;
 
 
 public class DatabaseHelper {
 
-    FirebaseDatabase mFirebaseDatabase;
-    DatabaseReference mPushDatabaseReference;
-    UtilFunctions utilFunctions;
-
+    private FirebaseDatabase mFirebaseDatabase;
+    private  DatabaseReference mPushDatabaseReference, rootRef, fromRef, toRef;
+    private UtilFunctions utilFunctions;
+    private String key;
     public DatabaseHelper()
     {
         mFirebaseDatabase = FirebaseDatabase.getInstance();
+        rootRef = mFirebaseDatabase.getReference();
         utilFunctions = new UtilFunctions();
+
     }
 
     public void createUser(User user)
     {
+        key = utilFunctions.getUser_key(Email);
         mPushDatabaseReference = mFirebaseDatabase.getReference().child("users");
-        String key = utilFunctions.getUser_key(Email);
         mPushDatabaseReference.child(key).setValue(user);
     }
-    private void registerUser (final DatabaseReference fromPath, final DatabaseReference toPath) {
-        fromPath.addListenerForSingleValueEvent(new ValueEventListener() {
+    public void registerUser (String category, String event_name) {
+
+        final DatabaseReference fromPath, toPath;
+        key = utilFunctions.getUser_key(Email);
+        toPath = rootRef.child("Events").child(category).child(event_name).child("Registrations").child(key);
+        fromPath = rootRef.child("users").child(key);
+
+        toPath.setValue(axisid, new DatabaseReference.CompletionListener() {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                toPath.setValue(dataSnapshot.getValue(), new DatabaseReference.CompletionListener() {
-                    @Override
-                    public void onComplete(DatabaseError firebaseError, DatabaseReference firebase) {
-                        if (firebaseError != null) {
-                            System.out.println("Copy failed");
-                        } else {
-                            System.out.println("Success");
+            public void onComplete(DatabaseError firebaseError, DatabaseReference firebase) {
+                if (firebaseError != null) {
+                    System.out.println("Copy failed");
+                } else {
+                    System.out.println("Success"+axisid);
 
-                        }
-                    }
-                });
-
-            }
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
+                }
             }
         });
-    }
 
+
+        fromPath.child(category).child(event_name).setValue("Registered", new DatabaseReference.CompletionListener() {
+            @Override
+            public void onComplete(DatabaseError firebaseError, DatabaseReference firebase) {
+                if (firebaseError != null) {
+                    System.out.println("Copy failed");
+                } else {
+                    System.out.println("Success"+ axisid+"$");
+
+                }
+            }
+        });
+
+    }
 }

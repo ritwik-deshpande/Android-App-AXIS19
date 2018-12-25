@@ -58,7 +58,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                 intent.putExtra("phone1", list.get(i).getPhone1());
                 intent.putExtra("phone2", list.get(i).getPhone2());
                 //Log.d("tag","The date of event is:"+list.get(i).getDate());
-
+                intent.putExtra("category",list.get(i).getCategory());
                 intent.putExtra("Date",list.get(i).getDate());
                 intent.putExtra("Venue",list.get(i).getVenue());
                 context.startActivity(intent);
