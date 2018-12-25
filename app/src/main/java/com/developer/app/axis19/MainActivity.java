@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
-import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
@@ -16,10 +15,11 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -36,12 +36,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.Arrays;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
-import java.util.Random;
-import com.developer.app.axis19.UtilFunctions;
-import com.developer.app.axis19.DatabaseHelper;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -77,6 +72,10 @@ public class MainActivity extends AppCompatActivity
     private static final int RC_SIGN_IN = 123;
     private boolean isNewUser ;
 
+    FloatingActionButton fab_share,fab_fb,fab_insta;
+    Animation fab_open,fab_close,fab_clock,fab_anticlock;
+    Boolean isOpened;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -84,12 +83,57 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
+        fab_share = (FloatingActionButton)findViewById(R.id.fab_share);
+        fab_fb = (FloatingActionButton)findViewById(R.id.fab_fb);
+        fab_insta = (FloatingActionButton)findViewById(R.id.fab_insta);
+
+        fab_open = AnimationUtils.loadAnimation(this,R.anim.fab_open);
+        fab_close = AnimationUtils.loadAnimation(this,R.anim.fab_close);
+        fab_clock = AnimationUtils.loadAnimation(this,R.anim.rotate_clockwise);
+        fab_anticlock = AnimationUtils.loadAnimation(this,R.anim.rotate_anticlockwise);
+        isOpened = false;
+
+        fab_share.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                if(isOpened){
+                    fab_fb.startAnimation(fab_close);
+                    fab_fb.setClickable(false);
+                    fab_insta.startAnimation(fab_close);
+                    fab_insta.setClickable(false);
+                    fab_share.startAnimation(fab_anticlock);
+                    isOpened=false;
+                }
+                else
+                {
+                    fab_fb.startAnimation(fab_open);
+                    fab_fb.setClickable(true);
+                    fab_insta.startAnimation(fab_open);
+                    fab_insta.setClickable(true);
+                    fab_share.startAnimation(fab_clock);
+                    isOpened=true;
+
+                    fab_fb.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            String url = "https://www.facebook.com/axisvnit";
+                            Intent i = new Intent(Intent.ACTION_VIEW);
+                            i.setData(Uri.parse(url));
+                            startActivity(i);
+                        }
+                    });
+
+                    fab_insta.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            String url = "https://www.instagram.com/axis_vnit/";
+                            Intent i = new Intent(Intent.ACTION_VIEW);
+                            i.setData(Uri.parse(url));
+                            startActivity(i);
+                        }
+                    });
+
+                }
             }
         });
 
@@ -267,15 +311,7 @@ public class MainActivity extends AppCompatActivity
             //case R.id.menu_visit_website:
             //  uri = Uri.parse(getResources().getString(R.string.matrix_website));
             //break;
-            case R.id.menu_follow_fb:
-                uri = Uri.parse(getResources().getString(R.string.axis_fb_link));
-                break;
-            // case R.id.menu_follow_twitter:
-            //   uri = Uri.parse(getResources().getString(R.string.matrix_twit_link));
-            // break;
-            case R.id.menu_follow_instagram:
-                uri = Uri.parse(getResources().getString(R.string.axis_insta_link));
-                break;
+
 
             //case R.id.menu_sign_out:
 
