@@ -294,9 +294,18 @@ public class MainActivity extends AppCompatActivity
 
         if (id == R.id.homepage_menuItem) {
             // Handle the camera action
-            Intent i = new Intent(this, MainActivity.class);
-            startActivity(i);
+            Context c=this;
+            Class cls=c.getClass();
+            if(cls!=MainActivity.class)
+            {
+                Intent i = new Intent(this, MainActivity.class);
+                startActivity(i);
+            }
+
+
         } else if (id == R.id.myRegistrations_menuItem) {
+            Intent i = new Intent(this, MyRegistration.class);
+            startActivity(i);
 
         } else if (id == R.id.sponsors_menuItem) {
 
