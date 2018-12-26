@@ -1,6 +1,7 @@
 package com.developer.app.axis19;
 
 import android.content.Context;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -12,8 +13,20 @@ import android.util.Log;
 import android.view.View;
 import android.view.animation.AnimationUtils;
 import android.view.animation.LayoutAnimationController;
+import android.widget.Toast;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import static com.developer.app.axis19.MainActivity.Email;
+import static java.security.AccessController.getContext;
+
 
 public class MyRegistration extends AppCompatActivity {
 
@@ -23,9 +36,15 @@ public class MyRegistration extends AppCompatActivity {
     private RecyclerViewAdapterRegistration r;
 
     ArrayList<Event> lst = new ArrayList<>();
+    ArrayList<String> eventName = new ArrayList<String>();
+
+    DatabaseReference rootRef,usersRef,eventRef;
+    ValueEventListener valueEventListener,valueEventListener1;
+
+    UtilFunctions utilFunctions;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_registration);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -40,48 +59,96 @@ public class MyRegistration extends AppCompatActivity {
             }
         });
 
-        runAnimation(0);
-
-    }
-
-    void initMyReg(){
-        String img_url;
-        lst.add(new Event("Insomnia","Kapeel","Sanika","Coding Event","https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRUq0PqbjaMU2LTh5HaeKvGJgYs5UR1AQtkxtOehqCU3t22amRg",9868696,89868878,"grxth","31/2/7"));
-        lst.add(new Event("Insomnia","Kapeel","Sanika","Coding Event","https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRUq0PqbjaMU2LTh5HaeKvGJgYs5UR1AQtkxtOehqCU3t22amRg",9868696,89868878,"grxth","31/2/7"));
-        lst.add(new Event("Insomnia","Kapeel","Sanika","Coding Event","https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRUq0PqbjaMU2LTh5HaeKvGJgYs5UR1AQtkxtOehqCU3t22amRg",9868696,89868878,"grxth","31/2/7"));
-        initRecyclerView();
-
-    }
-
-
-
-    void initRecyclerView(){
+        utilFunctions = new UtilFunctions();
         Log.d(TAG,"Inisde Init Recycler View");
         recyclerView = findViewById(R.id.myreg);
+        //recyclerView.setHasFixedSize(true);
         r=new RecyclerViewAdapterRegistration(lst,this);
         recyclerView.setAdapter(r);
         recyclerView.setLayoutManager(new GridLayoutManager(this,1));
 
+        rootRef = FirebaseDatabase.getInstance().getReference();
+        usersRef = rootRef.child("users").child(utilFunctions.getUser_key(Email)).child("Competitions");
+
+        MyRegistration.FetchEventList fel = new MyRegistration.FetchEventList();
+        fel.execute();
     }
 
-    private void runAnimation(int type) {
+    public void updateUI(){
+
+        r = new RecyclerViewAdapterRegistration(lst,this);
+        recyclerView.setAdapter(r);
+        //recyclerView.scrollToPosition(0);
+        //pg.setVisibility(View.GONE);
+    }
 
 
-        initMyReg();
-        Context context = recyclerView.getContext();
-        LayoutAnimationController controller=null;
+    public class FetchEventList extends AsyncTask<Void,Void,ArrayList<Event>> {
 
-        // 0 denotes fall_down animation
-        if(type==0){
-            controller= AnimationUtils.loadLayoutAnimation(this,R.anim.item_falldown_animation);
+        @Override
+        protected void onPreExecute() {
+            //bar.setVisibility(View.VISIBLE);
         }
 
+        @Override
+        protected ArrayList<Event> doInBackground(Void... params) {
 
-        //Set animations
-        Log.d("My Registrations","Setting Animations");
-        recyclerView.setLayoutAnimation(controller);
-        recyclerView.getAdapter().notifyDataSetChanged();
-        recyclerView.scheduleLayoutAnimation();
+            valueEventListener = new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    //Toast.makeText(getContext(),"retrieving data",Toast.LENGTH_SHORT).show();
+                    for (DataSnapshot ds : dataSnapshot.getChildren()) {
 
+                        eventName.add(ds.getKey());
+                    }
+                    //initRecyclerView();
+                    System.out.println(eventName);
+
+                    eventRef = rootRef.child("Events").child("Competitions");
+                    System.out.println(eventName);
+                    eventRef.addListenerForSingleValueEvent(valueEventListener1 = new ValueEventListener() {
+                                @Override
+                                public void onDataChange(DataSnapshot dataSnapshot) {
+                                    //Toast.makeText(getContext(),"retrieving data",Toast.LENGTH_SHORT).show();
+                                    for (DataSnapshot ds : dataSnapshot.getChildren()) {
+
+                                        if (eventName.contains(ds.getKey())) {
+                                            lst.add(ds.getValue(Event.class));
+                                            System.out.println(ds.getKey());
+                                        }
+                                        System.out.println(ds.getKey());
+                                    }
+                                    //initRecyclerView();
+                                    System.out.println(lst);
+                                }
+
+                                @Override
+                                public void onCancelled(DatabaseError databaseError) {
+                                }
+                            }
+
+                    );
+                    updateUI();
+                }
+
+                    //LayoutAnimationController controller=null;
+
+                    // 0 denotes fall_down animation
+                    //controller= AnimationUtils.loadLayoutAnimation(MyRegistration.this,R.anim.item_falldown_animation);
+
+
+                    //Set animations
+                    //Log.d("My Registrations","Setting Animations");
+                    //recyclerView.setLayoutAnimation(controller);
+                    //recyclerView.getAdapter().notifyDataSetChanged();
+                    //recyclerView.scheduleLayoutAnimation();
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+                }
+            };
+            usersRef.addListenerForSingleValueEvent(valueEventListener);
+            return null;
+        }
     }
 }

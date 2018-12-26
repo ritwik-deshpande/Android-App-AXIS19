@@ -50,6 +50,9 @@ dependencies {
     implementation "com.google.android.gms:play-services-gcm:16.0.0"
     implementation 'com.google.firebase:firebase-messaging:17.3.4'
     implementation 'de.hdodenhof:circleimageview:2.2.0'
+    //implementation 'com.github.wenchaojiang:AndroidSwipeableCardStack:0.*.*'
+    //implementation 'com.lorentzos.swipecards:library:1.0.9@aar'
+
 }
 
 apply plugin: 'com.google.gms.google-services'
