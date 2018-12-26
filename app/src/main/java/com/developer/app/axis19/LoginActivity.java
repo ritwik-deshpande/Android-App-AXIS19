@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -12,6 +13,7 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
@@ -55,6 +57,13 @@ public class LoginActivity extends AppCompatActivity  {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         db = new DatabaseHelper();
+
+        username = MainActivity.name;
+        email = Email;
+        ((TextView)findViewById(R.id.email)).setText(email);
+        ((TextView)findViewById(R.id.username)).setText(username);
+
+
         submit=(Button)findViewById(R.id.submit);
         dob=(EditText)findViewById(R.id.dob);
         dob.setOnClickListener(new View.OnClickListener() {
@@ -82,10 +91,6 @@ public class LoginActivity extends AppCompatActivity  {
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                username = MainActivity.name;
-                email = Email;
-                ((TextView)findViewById(R.id.email)).setText(email);
-                ((TextView)findViewById(R.id.username)).setText(username);
                 axisid = MainActivity.axisid;
                 college = ((EditText)findViewById(R.id.college)).getText().toString();
                 country = ((EditText)findViewById(R.id.country)).getText().toString();
@@ -93,15 +98,54 @@ public class LoginActivity extends AppCompatActivity  {
                 radioGroup = ((RadioGroup)findViewById(R.id.gender));
                 int selectedId = radioGroup.getCheckedRadioButtonId();
                 // find the radiobutton by returned id
-                gender = ((RadioButton) findViewById(selectedId)).getText().toString();
+                if(selectedId == -1)
+                {
+                    Toast.makeText(LoginActivity.this,"Please select your gender",Toast.LENGTH_SHORT).show();
+                }
+                else
+                {
+                    gender = ((RadioButton) findViewById(selectedId)).getText().toString();
+                }
 
                 phone = ((EditText)findViewById(R.id.contactno)).getText().toString();
                 zipcode = ((EditText)findViewById(R.id.zipcode)).getText().toString();
                 DOB  = dob.getText().toString();
-                login_user = new User(username, email,axisid,college,country, DOB,address,gender,phone,zipcode);
-                db.createUser(login_user);
-                Intent i = new Intent(LoginActivity.this,MainActivity.class);
-                startActivity(i);
+                if(TextUtils.isEmpty(college))
+                {
+                    ((EditText)findViewById(R.id.college)).setError("College field is required");
+                }
+                else if(TextUtils.isEmpty(country))
+                {
+                    ((EditText)findViewById(R.id.country)).setError("Country field is required");
+                }
+                else if(TextUtils.isEmpty(address))
+                {
+                    ((EditText)findViewById(R.id.address)).setError("Address field is required");
+                }
+                else if(TextUtils.isEmpty(gender))
+                {
+                    Toast.makeText(LoginActivity.this,"Please select your gender",Toast.LENGTH_SHORT).show();
+                }
+                else if(TextUtils.isEmpty(phone) || phone.length() != 10)
+                {
+                    ((EditText)findViewById(R.id.contactno)).setError("Please enter a valid contact number");
+                }
+                else if(TextUtils.isEmpty(zipcode) || zipcode.length() != 6)
+                {
+                    ((EditText)findViewById(R.id.zipcode)).setError("Enter a valid zipcode");
+                }
+                else if(TextUtils.isEmpty(DOB))
+                {
+                    Toast.makeText(LoginActivity.this,"Please select your date of birth",Toast.LENGTH_SHORT).show();
+                }
+                else
+                {
+                    login_user = new User(username, email,axisid,college,country, DOB,address,gender,phone,zipcode);
+                    db.createUser(login_user);
+                    Intent i = new Intent(LoginActivity.this,MainActivity.class);
+                    startActivity(i);
+                }
+
             }
         });
 
