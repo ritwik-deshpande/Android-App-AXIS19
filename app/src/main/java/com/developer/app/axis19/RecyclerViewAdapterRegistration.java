@@ -3,7 +3,7 @@ package com.developer.app.axis19;
 import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
-import android.support.v7.widget.AppCompatButton;
+import android.support.v7.widget.AppCompatImageButton;
 import android.support.v7.widget.AppCompatTextView;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -78,7 +78,7 @@ public class RecyclerViewAdapterRegistration extends  RecyclerView.Adapter<Recyc
 
         CircleImageView image;
         AppCompatTextView name;
-        AppCompatButton viewdetails;
+        AppCompatImageButton viewdetails;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
