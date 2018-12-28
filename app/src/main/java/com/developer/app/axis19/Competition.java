@@ -1,10 +1,13 @@
 package com.developer.app.axis19;
 
 import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -62,7 +65,25 @@ public class Competition extends Fragment {
 
         recyclerView.setLayoutManager(new GridLayoutManager(getContext(),2));
         //recyclerView.setAdapter(recyclerViewAdapter);
+        ConnectivityManager conMan = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
 
+        //mobile
+        NetworkInfo.State mobile = conMan.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).getState();
+
+        //wifi
+        NetworkInfo.State wifi = conMan.getNetworkInfo(ConnectivityManager.TYPE_WIFI).getState();
+
+        if (mobile == NetworkInfo.State.CONNECTED || wifi == NetworkInfo.State.CONNECTED) {
+
+        } else  {
+            try {
+                Snackbar.make(getActivity().findViewById(R.id.nav_view),"No Internet Connection",Snackbar.LENGTH_LONG).show();
+            }catch (Exception e)
+            {           }
+
+            Toast.makeText(getActivity(),"Unable to fetch latest data",Toast.LENGTH_SHORT).show();
+
+        }
         Competition.FetchEventList fel = new Competition.FetchEventList();
         fel.execute();
 
