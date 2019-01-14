@@ -1,5 +1,6 @@
 package com.developer.app.axis19;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -18,6 +19,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.TextView;
@@ -72,6 +74,7 @@ public class MainActivity extends AppCompatActivity
     private static final int RC_SIGN_IN = 123;
     private boolean isNewUser ;
 
+    Dialog settingsDialog;
     FloatingActionButton fab_share,fab_fb,fab_insta;
     Animation fab_open,fab_close,fab_clock,fab_anticlock;
     Boolean isOpened;
@@ -92,6 +95,11 @@ public class MainActivity extends AppCompatActivity
         fab_clock = AnimationUtils.loadAnimation(this,R.anim.rotate_clockwise);
         fab_anticlock = AnimationUtils.loadAnimation(this,R.anim.rotate_anticlockwise);
         isOpened = false;
+
+        settingsDialog = new Dialog(this);
+        settingsDialog.getWindow().requestFeature(Window.FEATURE_NO_TITLE);
+        settingsDialog.setContentView(getLayoutInflater().inflate(R.layout.signout_dialog
+                , null));
 
         fab_share.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -188,6 +196,8 @@ public class MainActivity extends AppCompatActivity
 
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+
+                settingsDialog.show();
                 user = firebaseAuth.getCurrentUser();
                 if (user != null) {
                     Email = user.getEmail();
@@ -226,6 +236,9 @@ public class MainActivity extends AppCompatActivity
                                 startActivity(i);
 
                             }
+                            navDrawerUsername.setText((String) user.getDisplayName());
+                            navDrawerUseremailid.setText(axisid);
+                            settingsDialog.dismiss();
 
                         }
                         @Override
@@ -234,18 +247,22 @@ public class MainActivity extends AppCompatActivity
                         }
                     });
 
-                    navDrawerUsername.setText((String) user.getDisplayName());
-                    navDrawerUseremailid.setText((String) user.getEmail());
+                   // navDrawerUsername.setText((String) user.getDisplayName());
+                   // navDrawerUseremailid.setText((String) user.getEmail());
 
 
                 } else {
                     // User is signed out
+
+
                     Toast.makeText(MainActivity.this, "user signed out", Toast.LENGTH_SHORT).show();
                     List<AuthUI.IdpConfig> providers = Arrays.asList(
                             new AuthUI.IdpConfig.GoogleBuilder().build());
                     startActivityForResult(
                             AuthUI.getInstance()
                                     .createSignInIntentBuilder()
+                                    .setTheme(R.style.LoginTheme)
+                                    .setLogo(R.drawable.axis_logo)
                                     .setIsSmartLockEnabled(false)
                                     .setAvailableProviders(providers)
                                     .setLogo(R.drawable.nav_header)
@@ -268,7 +285,8 @@ public class MainActivity extends AppCompatActivity
                 // Successfully signed in
                 FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
                 navDrawerUsername.setText((String) user.getDisplayName());
-                navDrawerUseremailid.setText((String) user.getEmail());
+               // navDrawerUseremailid.setText((String) user.getEmail());
+                navDrawerUseremailid.setText(axisid);
                 // ...
             } else {
                 // Sign in failed. If response is null the user canceled the
@@ -352,7 +370,12 @@ public class MainActivity extends AppCompatActivity
 
         } else if (id == R.id.developers_menuItem) {
 
+            Intent i = new Intent(MainActivity.this, Developers.class);
+            startActivity(i);
+
         } else if (id == R.id.sign_out) {
+
+            settingsDialog.show();
 
             navDrawerUsername.setText("");
             navDrawerUseremailid.setText("");

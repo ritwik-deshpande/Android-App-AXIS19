@@ -168,7 +168,8 @@
     <string name="axis_twit_link">https://twitter.com/axisvnit</string>
     <string name="aboutapp">About App</string>
     <string name="core_team">Core Team</string>
-    <string name="title_activity_coreteam">coreteam</string>
-    <string name="title_activity_my_registration">MyRegistration</string>
+    <string name="title_activity_coreteam">Core Team</string>
+    <string name="title_activity_my_registration">My Registrations</string>
+    <string name="title_activity_developers">Developers</string>
 
 </resources>
