@@ -45,7 +45,7 @@ public class Developers extends AppCompatActivity {
     }
 
     void initProfile(){
-        //lst.add(new Profile("Chaitya",R.drawable.sathish,"ritwikdeshpande01@gmail.com","9820188402","3rd year CSE"));
+        lst.add(new Profile("Chaitya",R.drawable.sathish,"ritwikdeshpande01@gmail.com","9820188402","3rd year CSE"));
         lst.add(new Profile("Ritwik",R.drawable.sathish,"ritwikdeshpande01@gmail.com","9820188402","3rd year CSE"));
         lst.add(new Profile("Bhumesh",R.drawable.sathish,"ritwikdeshpande01@gmail.com","9820188402","3rd year CSE"));
         lst.add(new Profile("Abdul",R.drawable.sathish,"ritwikdeshpande01@gmail.com","9820188402","3rd year CSE"));
