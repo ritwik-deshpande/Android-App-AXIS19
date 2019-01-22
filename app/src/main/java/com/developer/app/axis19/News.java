@@ -57,7 +57,7 @@ public class News extends Fragment {
         };
         h.postDelayed(r, 3000);
 
-        viewPager=(ViewPager)v.findViewById(R.id.news_viewpager);
+        viewPager= v.findViewById(R.id.news_viewpager);
 
 
         initNews();
@@ -83,12 +83,16 @@ public class News extends Fragment {
     private class ViewPagerStack implements ViewPager.PageTransformer {
         @Override
         public void transformPage(@NonNull View page, float position) {
+
             if(position>=0){
                 page.setScaleX(1-0.08f*position);
                 page.setScaleY(1);
                 page.setTranslationX(-page.getWidth()*position);
                 page.setTranslationY(-30*position);
             }
+
         }
+
     }
+
 }

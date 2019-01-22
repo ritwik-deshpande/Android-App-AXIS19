@@ -180,9 +180,12 @@ public class MainActivity extends AppCompatActivity
         // Adding Fragments
 
         viewPagerAdapter.addFragment(new News(), "News and More");
+        viewPagerAdapter.addFragment(new guestlectures(), "Featured");
         viewPagerAdapter.addFragment(new Competition(), "Competitions");
-        viewPagerAdapter.addFragment(new guestlectures(), "Guest Lectures");
-        viewPagerAdapter.addFragment(new Informals(), "Informals");
+        viewPagerAdapter.addFragment(new Challenges(), "Challenges");
+        viewPagerAdapter.addFragment(new Championships(), "Championships");
+        viewPagerAdapter.addFragment(new Analytics(), "Analytics");
+
 
 
         viewPager.setAdapter(viewPagerAdapter);

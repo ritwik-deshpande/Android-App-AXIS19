@@ -62,7 +62,9 @@ public class EventDetails extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_event_details);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+
         setSupportActionBar(toolbar);
+        toolbar.setNavigationIcon(R.drawable.ic_arrow_back_white_24dp);
         db = new DatabaseHelper();
         Log.d(TAG,"on Create called");
 
@@ -76,6 +78,15 @@ public class EventDetails extends AppCompatActivity {
         AppCompatButton register_button = (AppCompatButton)findViewById(R.id.reg_button);
 
         getIncomingIntent();
+        //Toolbar mToolbar = (Toolbar) findViewById(R.id.back_button);
+
+
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.share_details);
         fab.setOnClickListener(new View.OnClickListener() {

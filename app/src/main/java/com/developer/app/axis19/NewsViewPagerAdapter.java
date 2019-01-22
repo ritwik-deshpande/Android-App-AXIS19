@@ -54,7 +54,12 @@ public class NewsViewPagerAdapter extends PagerAdapter {
         TextView newscontent = (TextView)v.findViewById(R.id.news_content);
         newscontent.setText(lst.get(position).getNews_contennt());
 
-        container.addView(v);
+        if(v.getParent() != null) {
+            ((ViewGroup)v.getParent()).removeView(v); // <- fix
+            container.addView(v);
+        }
+
+
 
         return v;
     }

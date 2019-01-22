@@ -5,12 +5,12 @@
     android:background="@drawable/back_ground"
     >
 
-   <android.support.v7.widget.RecyclerView
-       android:layout_width="match_parent"
-       android:layout_height="match_parent"
-       android:id="@+id/competition_recyclerview"
-       >
-   </android.support.v7.widget.RecyclerView>
+    <android.support.v7.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/challenges_recyclerview"
+        >
+    </android.support.v7.widget.RecyclerView>
 
 
 
