@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:layout_height="wrap_content"
+
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="15dp">
 
     <android.support.v7.widget.CardView
         android:id="@+id/registration_card"
@@ -13,6 +15,7 @@
         android:layout_alignParentTop="true"
         android:layout_marginTop="30dp"
         app:cardBackgroundColor="#808080"
+
         android:layout_alignParentLeft="true">
 
         <LinearLayout
@@ -21,33 +24,50 @@
             android:orientation="vertical"
             android:padding="4dp">
 
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/pic"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:src="@drawable/ic_launcher_background" />
-
-            <android.support.v7.widget.AppCompatTextView
-                android:id="@+id/name"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:layout_marginLeft="30dp"
-                android:layout_toRightOf="@+id/dp"
-                android:text="Sahish"
-                android:textColor="#FFFFFF"
-                android:textSize="20sp" />
+                android:orientation="horizontal">
 
-            <android.support.v7.widget.AppCompatTextView
-                android:id="@+id/year_dept"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:layout_marginLeft="30dp"
-                android:layout_toRightOf="@+id/dp"
-                android:text="Sahish"
-                android:textColor="#FFFFFF"
-                android:textSize="20sp" />
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/pic"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:src="@drawable/ic_launcher_background" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <android.support.v7.widget.AppCompatTextView
+                        android:id="@+id/name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:layout_marginLeft="30dp"
+                        android:layout_toRightOf="@+id/dp"
+                        android:text="Sahish"
+                        android:textColor="#FFFFFF"
+                        android:textSize="20sp" />
+
+                    <android.support.v7.widget.AppCompatTextView
+                        android:id="@+id/year_dept"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:layout_marginLeft="30dp"
+                        android:layout_toRightOf="@+id/dp"
+                        android:text="3rd year, Computer Science and Engineering"
+                        android:textColor="#FFFFFF"
+                        android:textSize="20sp" />
+
+                </LinearLayout>
+
+
+
+            </LinearLayout>
+
+
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -58,27 +78,28 @@
                     android:id="@+id/mail"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
-                    android:src="@drawable/email_logo"/>
+                    android:src="@drawable/svg_logo_facebook"/>
 
                 <android.support.v7.widget.AppCompatImageButton
                     android:id="@+id/linkedin"
-                    android:layout_width="50dp"
+                    android:layout_marginLeft="60dp"
+                   android:layout_width="50dp"
                     android:layout_height="50dp"
-                    android:src="@drawable/linkedin_logo"/>
+                    android:src="@drawable/svg_ld"/>
 
                 <android.support.v7.widget.AppCompatImageButton
                     android:id="@+id/github"
+                    android:layout_marginLeft="60dp"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
-                    android:src="@drawable/github_logo"/>
+                    android:src="@drawable/svg_logo_github"/>
 
                 <android.support.v7.widget.AppCompatImageButton
                     android:id="@+id/phone"
+                    android:layout_marginLeft="60dp"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
-                    android:src="@drawable/call_logo"/>
-
-
+                    android:src="@drawable/svg_phone_white_24px"/>
             </LinearLayout>
         </LinearLayout>
     </android.support.v7.widget.CardView>

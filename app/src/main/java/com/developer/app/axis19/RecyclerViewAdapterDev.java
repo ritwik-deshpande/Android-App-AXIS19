@@ -1,9 +1,6 @@
 package com.developer.app.axis19;
 
 import android.content.Context;
-import android.content.Intent;
-import android.net.Uri;
-import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -55,6 +52,7 @@ public class RecyclerViewAdapterDev extends RecyclerView.Adapter<RecyclerViewAda
 
     @Override
     public int getItemCount() {
+        Log.d("TAG","The size of list is"+profiles.size());
         return profiles.size();
     }
 
@@ -82,4 +80,3 @@ public class RecyclerViewAdapterDev extends RecyclerView.Adapter<RecyclerViewAda
     }
 
 }
-

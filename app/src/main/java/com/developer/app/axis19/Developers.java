@@ -57,7 +57,7 @@ public class Developers extends AppCompatActivity {
 
 
     void initRecyclerView(){
-        Log.d(TAG,"Inisde Init Recycler View");
+        Log.d(TAG,"Inisde Init Recycler View"+lst.size());
         recyclerView= findViewById(R.id.dev_recyclerview);
         r=new RecyclerViewAdapterDev(lst,this);
         recyclerView.setAdapter(r);

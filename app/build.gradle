@@ -51,6 +51,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-messaging:17.3.4'
     implementation 'de.hdodenhof:circleimageview:2.2.0'
     implementation 'com.yuyakaido.android:card-stack-view:2.2.1'
+    
 }
 
 apply plugin: 'com.google.gms.google-services'

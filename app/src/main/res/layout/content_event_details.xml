@@ -8,9 +8,13 @@
     tools:context=".EventDetails"
     tools:showIn="@layout/activity_event_details">
 
+
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
+
 
         <android.support.v7.widget.LinearLayoutCompat
             android:layout_width="match_parent"
@@ -37,7 +41,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
                         android:layout_marginStart="8dp"
-                        android:text="@string/description"
+                        android:text="Information:"
                         android:textColor="@color/colorPrimary"
                         android:textAppearance="@style/TextAppearance.AppCompat.Large"
                         android:layout_marginLeft="8dp" />
@@ -99,7 +103,7 @@
                             android:padding="10dp"
                             android:layout_marginLeft="10dp"
                             style="@style/Base.Widget.AppCompat.Button.Borderless"
-                            android:src="@drawable/calendar"
+                            android:src="@drawable/ic_today_black_24dp"
                             />
                         <android.support.v7.widget.AppCompatTextView
                             android:id="@+id/date"
@@ -129,7 +133,7 @@
                             android:padding="10dp"
                             android:layout_marginLeft="10dp"
                             style="@style/Base.Widget.AppCompat.Button.Borderless"
-                            android:src="@drawable/location"
+                            android:src="@drawable/ic_location_on_black_24dp"
                             />
                         <android.support.v7.widget.AppCompatTextView
                             android:id="@+id/venue"

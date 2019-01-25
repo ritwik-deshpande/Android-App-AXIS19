@@ -51,8 +51,9 @@
             android:label="@string/title_activity_my_registration"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".Splash" />
-        <activity android:name=".Developers"
-            android:label="Developers"
+        <activity
+            android:name=".Developers"
+            android:label="@string/title_activity_developers"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 

@@ -3,14 +3,17 @@ package com.developer.app.axis19;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.CalendarContract;
 import android.provider.ContactsContract;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatButton;
@@ -25,6 +28,11 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 
+import java.io.BufferedInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -46,6 +54,7 @@ public class EventDetails extends AppCompatActivity {
     String eventDesc;
     Date date;
     String venue;
+    ImageView imageView;
 
 
     @Override
@@ -53,18 +62,13 @@ public class EventDetails extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_event_details);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+
         setSupportActionBar(toolbar);
+        toolbar.setNavigationIcon(R.drawable.ic_arrow_back_white_24dp);
         db = new DatabaseHelper();
         Log.d(TAG,"on Create called");
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+
         AppCompatImageButton call_person_one = (AppCompatImageButton) findViewById(R.id.call_contact_person_one);
         AppCompatImageButton call_person_two = (AppCompatImageButton) findViewById(R.id.call_contact_person_two);
         AppCompatImageButton save_person_one = (AppCompatImageButton) findViewById(R.id.save_contact_person_one);
@@ -74,6 +78,50 @@ public class EventDetails extends AppCompatActivity {
         AppCompatButton register_button = (AppCompatButton)findViewById(R.id.reg_button);
 
         getIncomingIntent();
+        //Toolbar mToolbar = (Toolbar) findViewById(R.id.back_button);
+
+
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.share_details);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent msg_intent = new Intent(Intent.ACTION_SEND);
+                msg_intent.putExtra(Intent.EXTRA_STREAM,loadBitmap(event_img_url));
+                msg_intent.setType("image/*");
+                msg_intent.putExtra(Intent.EXTRA_SUBJECT,"Invite to event");
+                msg_intent.setType("text/plain");
+                msg_intent.putExtra(Intent.EXTRA_TEXT,eventName+"\n"+eventDesc+"\n");
+                msg_intent.setType("text/plain");
+                startActivity(msg_intent);
+//                Bitmap bitmap =getBitmapFromView(imageView);
+//                try {
+//                    File file = new File(getExternalCacheDir(),"logicchip.png");
+//                    FileOutputStream fOut = new FileOutputStream(file);
+//                    bitmap.compress(Bitmap.CompressFormat.PNG, 100, fOut);
+//                    fOut.flush();
+//                    fOut.close();
+//                    file.setReadable(true, false);
+//                    final Intent intent = new Intent(android.content.Intent.ACTION_SEND);
+//                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//                    intent.putExtra(Intent.EXTRA_TEXT, eventName);
+//                    intent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(file));
+//                    intent.setType("image/png");
+//                    startActivity(Intent.createChooser(intent, "Share image via"));
+//                } catch (Exception e) {
+//                    e.printStackTrace();
+//                }
+
+
+            }
+        });
 
         maps.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -130,6 +178,62 @@ public class EventDetails extends AppCompatActivity {
         });
 
     }
+    public Bitmap loadBitmap(String url)
+    {
+        Bitmap bm = null;
+        InputStream is = null;
+        BufferedInputStream bis = null;
+        try
+        {
+            URLConnection conn = new URL(url).openConnection();
+            conn.connect();
+            is = conn.getInputStream();
+            bis = new BufferedInputStream(is, 8192);
+            bm = BitmapFactory.decodeStream(bis);
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        finally {
+            if (bis != null)
+            {
+                try
+                {
+                    bis.close();
+                }
+                catch (IOException e)
+                {
+                    e.printStackTrace();
+                }
+            }
+            if (is != null)
+            {
+                try
+                {
+                    is.close();
+                }
+                catch (IOException e)
+                {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return bm;
+    }
+
+    private Bitmap getBitmapFromView(View view) {
+        Bitmap returnedBitmap = Bitmap.createBitmap(view.getWidth(), view.getHeight(),Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(returnedBitmap);
+        Drawable bgDrawable =view.getBackground();
+        if (bgDrawable!=null) {
+            bgDrawable.draw(canvas);
+        }   else{
+            canvas.drawColor(Color.WHITE);
+        }
+        view.draw(canvas);
+        return returnedBitmap;
+    }
     public void getIncomingIntent(){
 
         Log.d(TAG,"Checking for incoming Intent");
@@ -172,7 +276,7 @@ public class EventDetails extends AppCompatActivity {
         textView3.setText(OName1);
         assert textView4!=null;
         textView4.setText(OName2);
-        ImageView imageView=(ImageView)findViewById(R.id.event_img);
+        imageView=(ImageView)findViewById(R.id.event_img);
 
         AppCompatTextView textView5 =(AppCompatTextView)findViewById(R.id.date);
         Log.d("Tag","The date is:"+date);
