@@ -33,7 +33,7 @@
     <string name="hint_password">Password</string>
     <string name="desc_firebase_lockup">Firebase logo and name</string>
     <string name="auth_failed">Authentication failed</string>
-    <string name="title_activity_main">AXIS19</string>
+    <string name="title_activity_main">AXIS\' 19</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="nav_header_title">AXIS 19</string>
@@ -172,5 +172,6 @@
     <string name="title_activity_coreteam">Core Team</string>
     <string name="title_activity_my_registration">My Registrations</string>
     <string name="title_activity_developers">Developers</string>
+
 
 </resources>

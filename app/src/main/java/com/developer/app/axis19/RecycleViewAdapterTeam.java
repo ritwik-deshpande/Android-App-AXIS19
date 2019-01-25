@@ -78,8 +78,24 @@ public class RecycleViewAdapterTeam extends RecyclerView.Adapter<RecycleViewAdap
                 context.startActivity(intent);
             }
         };
+        View.OnClickListener emailOnClickListener = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_SENDTO);
+                switch (v.getId()) {
+
+                    case R.id.send_email:
+                        String mail="mailto:"+profiles.get(i).getEmail();
+                        intent.setData(Uri.parse(mail));
+                        break;
+
+                }
+                context.startActivity(intent);
+            }
+        };
         myViewHolder.call.setOnClickListener(callOnClickListener);
         myViewHolder.save.setOnClickListener(saveOnClickListener);
+        myViewHolder.send_email.setOnClickListener(emailOnClickListener);
     }
 
     @Override
@@ -96,6 +112,7 @@ public class RecycleViewAdapterTeam extends RecyclerView.Adapter<RecycleViewAdap
         TextView number;
         ImageButton call;
         ImageButton save ;
+        ImageButton send_email;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -107,6 +124,7 @@ public class RecycleViewAdapterTeam extends RecyclerView.Adapter<RecycleViewAdap
             number=itemView.findViewById(R.id.phone_number);
             call = (ImageButton) itemView.findViewById(R.id.call);
             save= (ImageButton) itemView.findViewById(R.id.save);
+            send_email=(ImageButton)itemView.findViewById(R.id.send_email);
         }
     }
 
