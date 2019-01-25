@@ -364,14 +364,25 @@ public class MainActivity extends AppCompatActivity
             Intent i = new Intent(this, MyRegistration.class);
             startActivity(i);
 
-        } else if (id == R.id.sponsors_menuItem) {
+        } else if (id == R.id.nav_sponsors) {
+
+            String url = "http://www.axisvnit.org/sponsors.html";
+            Intent i = new Intent(Intent.ACTION_VIEW);
+            i.setData(Uri.parse(url));
+            startActivity(i);
 
         } else if (id == R.id.core_menuItem) {
             Intent i = new Intent(MainActivity.this, coreteam.class);
             startActivity(i);
 
 
-        } else if (id == R.id.developers_menuItem) {
+        }
+        else if(id==R.id.nav_map){
+            Intent i = new Intent(MainActivity.this, MapsActivity.class);
+            startActivity(i);
+
+        }
+        else if (id == R.id.developers_menuItem) {
 
             Intent i = new Intent(MainActivity.this, Developers.class);
             startActivity(i);

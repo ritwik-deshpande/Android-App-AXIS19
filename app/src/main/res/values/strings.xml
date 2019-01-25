@@ -135,6 +135,7 @@
     </string>
 
     <string name="description">Description</string>
+    <string name="prompt_map">Find Event</string>
     <string name="venue_time">Venue and Time</string>
     <string name="registration">Registration</string>
     <string name="prizes">Prizes</string>

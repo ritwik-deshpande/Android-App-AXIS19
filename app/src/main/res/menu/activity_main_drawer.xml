@@ -17,9 +17,14 @@
             android:icon="@drawable/svg_chat_white_48px"/>
 
         <item
-            android:title="@string/sponsors"
-            android:id="@+id/sponsors_menuItem"
-            android:icon="@drawable/svg_new_releases_white_48px"/>
+            android:id="@+id/nav_map"
+            android:icon="@drawable/ic_menu_map"
+            android:title="Map" />
+
+        <item
+            android:id="@+id/nav_sponsors"
+            android:icon="@drawable/ic_menu_sponsors"
+            android:title="@string/sponsors" />
 
     </group>
 
@@ -37,6 +42,7 @@
             android:id="@+id/developers_menuItem"
             android:icon="@drawable/svg_code_white_48px"/>
 
+
     </group>
 
     <group
@@ -47,7 +53,7 @@
         <item
             android:title="Sign Out"
             android:id="@+id/sign_out"
-            android:icon="@drawable/svg_group_work_white_48px"/>
+            android:icon="@drawable/ic_menu_logout"/>
 
     </group>
 
