@@ -3,6 +3,7 @@ package com.developer.app.axis19;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -10,12 +11,19 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AnimationUtils;
 import android.view.animation.LayoutAnimationController;
 import android.widget.Toast;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,6 +33,9 @@ public class Challenges extends Fragment {
     private RecyclerView recyclerView;
 
     List<Event> lst = new ArrayList<>() ;
+    DatabaseReference rootRef,imagesRef;
+    ValueEventListener valueEventListener;
+
     public Challenges() {
     }
 
@@ -69,9 +80,10 @@ public class Challenges extends Fragment {
             Toast.makeText(getActivity(), "Unable to fetch latest data", Toast.LENGTH_SHORT).show();
 
         }
-//        Competition.FetchEventList fel = new Competition.FetchEventList();
-//        fel.execute();
+        Challenges.FetchEventList fel = new Challenges.FetchEventList();
+        fel.execute();
 
+        /*
         //Make changes here to add data through firebase.
         lst.add(new Event("Who is the Boss","Guru","Chaitya","Apti","https://drive.google.com/open?id=1DRuWJ3BaLCoDDekxAA8sd-wWx1MW68mg",9868696,896869868,"Chem","10/2/2019"));
         lst.add(new Event("Who is the Boss","Guru","Chaitya","Apti","https://drive.google.com/open?id=1DRuWJ3BaLCoDDekxAA8sd-wWx1MW68mg",8708798,696986976,"Chem","10/2/2019"));
@@ -81,7 +93,7 @@ public class Challenges extends Fragment {
 
         updateUI();
         //runAnimation(recyclerView,0);
-
+        */
 
         return v;
     }
@@ -108,6 +120,42 @@ public class Challenges extends Fragment {
 
         recyclerView.setAdapter(recyclerViewAdapter);
        // recyclerView.setLayoutManager(new GridLayoutManager(getContext(),2));
+    }
+
+    public class FetchEventList extends AsyncTask<Void,Void,ArrayList<Event>> {
+
+        @Override
+        protected void onPreExecute() {
+            //bar.setVisibility(View.VISIBLE);
+        }
+
+        @Override
+        protected ArrayList<Event> doInBackground(Void... params) {
+
+            lst.clear();
+            rootRef = FirebaseDatabase.getInstance().getReference();
+            imagesRef = rootRef.child("Events").child("Competitions");
+            valueEventListener = new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    Toast.makeText(getContext(),"retrieving data",Toast.LENGTH_SHORT).show();
+                    for(DataSnapshot ds : dataSnapshot.getChildren()) {
+
+                        lst.add((ds.getValue(Event.class)));
+                        Log.d("TAG","firebase created event object");
+                    }
+                    //Log.d("Size of list is ","size=" + ((Integer) lst.size()).toString());
+
+                    //runAnimation(recyclerView,0);
+                    updateUI();
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {}
+            };
+            imagesRef.addListenerForSingleValueEvent(valueEventListener);
+            return null;
+        }
     }
 
 }

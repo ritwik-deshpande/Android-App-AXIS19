@@ -45,7 +45,7 @@ public class NewsViewPagerAdapter extends PagerAdapter {
     public Object instantiateItem(@NonNull ViewGroup container, int position) {
         View v = mLayoutInflater.inflate(R.layout.item_news, container, false);
 
-        //\container.addView(v);
+        container.addView(v);
 
         ImageView newsimg=(ImageView)v.findViewById(R.id.news_image);
         //newsimg.setImageResource(lst.get(position).getImage());

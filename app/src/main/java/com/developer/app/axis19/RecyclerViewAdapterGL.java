@@ -13,6 +13,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+
 import java.util.Calendar;
 import java.util.List;
 
@@ -64,7 +66,7 @@ public class RecyclerViewAdapterGL extends RecyclerView.Adapter<RecyclerViewAdap
 
         String img = list.get(i).getImg_url();
 
-        //Glide.with(context).load(img).into(myViewHolder.eventImg);
+        Glide.with(context).load(img).into(myViewHolder.eventImg);
        // Glide.with(context).load(img).into(myViewHolder.eventImg);
         myViewHolder.parentLayout.setOnClickListener(new View.OnClickListener() {
             @Override
