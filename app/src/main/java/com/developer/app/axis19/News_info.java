@@ -2,21 +2,22 @@ package com.developer.app.axis19;
 
 public class News_info {
 
-    private int image;
+    private String image;
     private String news_head;
-    private  String news_contennt;
+    private  String news_content;
 
-    public News_info(int image, String news_head, String news_contennt) {
+    public News_info(){}
+    public News_info(String image, String news_head, String news_contennt) {
         this.image = image;
         this.news_head = news_head;
-        this.news_contennt = news_contennt;
+        this.news_content = news_contennt;
     }
 
-    public int getImage() {
+    public String getImage() {
         return image;
     }
 
-    public void setImage(int image) {
+    public void setImage(String image) {
         this.image = image;
     }
 
@@ -29,10 +30,10 @@ public class News_info {
     }
 
     public String getNews_contennt() {
-        return news_contennt;
+        return news_content;
     }
 
     public void setNews_contennt(String news_contennt) {
-        this.news_contennt = news_contennt;
+        this.news_content = news_contennt;
     }
 }

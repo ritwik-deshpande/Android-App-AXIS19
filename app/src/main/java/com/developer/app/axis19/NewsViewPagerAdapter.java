@@ -11,6 +11,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+
 import java.util.List;
 
 public class NewsViewPagerAdapter extends PagerAdapter {
@@ -46,8 +48,8 @@ public class NewsViewPagerAdapter extends PagerAdapter {
         container.addView(v);
 
         ImageView newsimg=(ImageView)v.findViewById(R.id.news_image);
-        newsimg.setImageResource(lst.get(position).getImage());
-
+        //newsimg.setImageResource(lst.get(position).getImage());
+        Glide.with(context).load(lst.get(position).getImage()).into(newsimg);
         TextView headLine = (TextView)v.findViewById(R.id.news_headline);
         headLine.setText(lst.get(position).getNews_head());
 

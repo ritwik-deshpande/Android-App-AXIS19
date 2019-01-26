@@ -2,6 +2,7 @@ package com.developer.app.axis19;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
@@ -13,6 +14,11 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.Calendar;
 
@@ -56,6 +62,8 @@ public class LoginActivity extends AppCompatActivity  {
         email = Email;
         ((TextView)findViewById(R.id.email)).setText(email);
         ((TextView)findViewById(R.id.username)).setText(username);
+
+
         submit=(Button)findViewById(R.id.submit);
         dob=(EditText)findViewById(R.id.dob);
         dob.setOnClickListener(new View.OnClickListener() {
@@ -83,7 +91,6 @@ public class LoginActivity extends AppCompatActivity  {
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 axisid = MainActivity.axisid;
                 college = ((EditText)findViewById(R.id.college)).getText().toString();
                 country = ((EditText)findViewById(R.id.country)).getText().toString();

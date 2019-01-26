@@ -49,7 +49,6 @@ public class Competition extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-
     }
 
 
@@ -59,15 +58,14 @@ public class Competition extends Fragment {
 
         v= inflater.inflate(R.layout.competitions_fragment,container,false);
 
+       // runAnimation(recyclerView,0);
         recyclerView = (RecyclerView)v.findViewById(R.id.competition_recyclerview);
 
-
-       // runAnimation(recyclerView,0);
+        //RecyclerViewAdapter recyclerViewAdapter=new RecyclerViewAdapter(getContext(),lst);
 
         recyclerView.setLayoutManager(new GridLayoutManager(getContext(),2));
         //recyclerView.setAdapter(recyclerViewAdapter);
         ConnectivityManager conMan = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
-
 
         //mobile
         NetworkInfo.State mobile = conMan.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).getState();
@@ -75,7 +73,6 @@ public class Competition extends Fragment {
         //wifi
         NetworkInfo.State wifi = conMan.getNetworkInfo(ConnectivityManager.TYPE_WIFI).getState();
 
-        // runAnimation(recyclerView,0);
         if (mobile == NetworkInfo.State.CONNECTED || wifi == NetworkInfo.State.CONNECTED) {
 
         } else  {
@@ -110,6 +107,7 @@ public class Competition extends Fragment {
         recyclerView.scheduleLayoutAnimation();
 
     }
+
     public void updateUI()
     {
         RecyclerViewAdapter recyclerViewAdapter=new RecyclerViewAdapter(getContext(),lst);
@@ -141,7 +139,7 @@ public class Competition extends Fragment {
                     }
                     //Log.d("Size of list is ","size=" + ((Integer) lst.size()).toString());
 
-                   // runAnimation(recyclerView,0);
+                    //runAnimation(recyclerView,0);
                     updateUI();
                 }
 
