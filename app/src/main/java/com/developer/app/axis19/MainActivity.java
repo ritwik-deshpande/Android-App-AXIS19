@@ -73,8 +73,8 @@ public class MainActivity extends AppCompatActivity
 
     private static final int RC_SIGN_IN = 123;
     private boolean isNewUser ;
-    Dialog settingsDialog;
 
+    Dialog settingsDialog;
     FloatingActionButton fab_share,fab_fb,fab_insta;
     Animation fab_open,fab_close,fab_clock,fab_anticlock;
     Boolean isOpened;
@@ -187,6 +187,7 @@ public class MainActivity extends AppCompatActivity
         viewPagerAdapter.addFragment(new Analytics(), "Analytics");
 
 
+
         viewPager.setAdapter(viewPagerAdapter);
         tabLayout.setupWithViewPager(viewPager);
 
@@ -198,10 +199,10 @@ public class MainActivity extends AppCompatActivity
 
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+
                 settingsDialog.show();
                 user = firebaseAuth.getCurrentUser();
                 if (user != null) {
-
                     Email = user.getEmail();
                     name = user.getDisplayName();
 
@@ -232,6 +233,9 @@ public class MainActivity extends AppCompatActivity
                                 //mPushDatabaseReference.child(key).setValue(user);
                                 db.createUser(user);
                                 Intent i = new Intent(MainActivity.this, LoginActivity.class);
+                                i.putExtra("username" , name);
+                                i.putExtra("email" , Email);
+                                i.putExtra("axisid", axisid);
                                 startActivity(i);
 
                             }
@@ -245,24 +249,28 @@ public class MainActivity extends AppCompatActivity
 
                         }
                     });
-                    System.out.println();
+
+                   // navDrawerUsername.setText((String) user.getDisplayName());
+                   // navDrawerUseremailid.setText((String) user.getEmail());
 
 
                 } else {
                     // User is signed out
+
+
                     Toast.makeText(MainActivity.this, "user signed out", Toast.LENGTH_SHORT).show();
                     List<AuthUI.IdpConfig> providers = Arrays.asList(
                             new AuthUI.IdpConfig.GoogleBuilder().build());
                     startActivityForResult(
                             AuthUI.getInstance()
                                     .createSignInIntentBuilder()
-                                    .setIsSmartLockEnabled(false)
-                                    .setAvailableProviders(providers)
                                     .setTheme(R.style.LoginTheme)
                                     .setLogo(R.drawable.axis_logo)
+                                    .setIsSmartLockEnabled(false)
+                                    .setAvailableProviders(providers)
+                                    .setLogo(R.drawable.nav_header)
                                     .build(),
                             RC_SIGN_IN);
-                    settingsDialog.dismiss();
                 }
             }
         };
@@ -280,6 +288,7 @@ public class MainActivity extends AppCompatActivity
                 // Successfully signed in
                 FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
                 navDrawerUsername.setText((String) user.getDisplayName());
+               // navDrawerUseremailid.setText((String) user.getEmail());
                 navDrawerUseremailid.setText(axisid);
                 // ...
             } else {
@@ -355,20 +364,33 @@ public class MainActivity extends AppCompatActivity
             Intent i = new Intent(this, MyRegistration.class);
             startActivity(i);
 
-        } else if (id == R.id.sponsors_menuItem) {
+        } else if (id == R.id.nav_sponsors) {
+
+            String url = "http://www.axisvnit.org/sponsors.html";
+            Intent i = new Intent(Intent.ACTION_VIEW);
+            i.setData(Uri.parse(url));
+            startActivity(i);
 
         } else if (id == R.id.core_menuItem) {
             Intent i = new Intent(MainActivity.this, coreteam.class);
             startActivity(i);
 
 
-        } else if (id == R.id.developers_menuItem) {
+        }
+        else if(id==R.id.nav_map){
+            Intent i = new Intent(MainActivity.this, MapsActivity.class);
+            startActivity(i);
+
+        }
+        else if (id == R.id.developers_menuItem) {
+
             Intent i = new Intent(MainActivity.this, Developers.class);
             startActivity(i);
 
         } else if (id == R.id.sign_out) {
 
             settingsDialog.show();
+
             navDrawerUsername.setText("");
             navDrawerUseremailid.setText("");
             AuthUI.getInstance()
@@ -378,7 +400,6 @@ public class MainActivity extends AppCompatActivity
 
                             valid=0;
                             navigationView.getMenu().getItem(0).setChecked(true);
-                            //settingsDialog.dismiss();
                         }
                     });
 
