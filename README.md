@@ -2,4 +2,10 @@
 
 Updates and registration for all events for AXIS'19.
 
-<img src="https://drive.google.com/uc?export=view&id=1sCvuErSaMW9IYcs2Tiz_fmvXOqvdjRYV" width="100" height="100">
+<img src="https://drive.google.com/uc?export=view&id=1sCvuErSaMW9IYcs2Tiz_fmvXOqvdjRYV" width="300" height="300">
+
+<img src="https://drive.google.com/uc?export=view&id=1sCvuErSaMW9IYcs2Tiz_fmvXOqvdjRYV" width="300" height="300">
+
+<img src="https://drive.google.com/uc?export=view&id=1sCvuErSaMW9IYcs2Tiz_fmvXOqvdjRYV" width="300" height="300">
+
+<img src="https://drive.google.com/uc?export=view&id=1sCvuErSaMW9IYcs2Tiz_fmvXOqvdjRYV" width="300" height="300">
