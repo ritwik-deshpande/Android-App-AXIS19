@@ -2,5 +2,4 @@
 
 Updates and registration for all events for AXIS'19.
 
-
-![alt text](https://drive.google.com/file/d/1sCvuErSaMW9IYcs2Tiz_fmvXOqvdjRYV/view?usp=sharing)
+![image](https://drive.google.com/uc?export=view&id=1sCvuErSaMW9IYcs2Tiz_fmvXOqvdjRYV)
